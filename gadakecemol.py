@@ -2,7 +2,7 @@ import pygame
 import sys
 import pytmx
 #to je trochu random ale videl jsem ze se to takhle delaj aby to bylo prehlednejsi a pak to muzes vsechno zmenit na jednom miste
-from settings import *
+from nastaveni import *
 
 pygame.init()
 
