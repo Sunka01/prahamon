@@ -1,6 +1,8 @@
 import pygame
 import sys
 import pytmx
+
+#testuju verified jen idk
 # to je trochu random ale videl jsem ze se to takhle delaj aby to bylo prehlednejsi a pak to muzes vsechno zmenit na
 # jednom miste
 import nastaveni as imgs
@@ -8,18 +10,22 @@ import nastaveni as imgs
 pygame.init()
 
 
-class Hrac:
-    def __init__(self, x, y, rychlost):
-        # tady proste to jakoze zarizuje tu lokaci a chuzi visco
 
+
+class Hra:
+
+    def __init__(self, x = 100, y = 100 , rychlost = 1):
         self.rychlost = rychlost
         self.x = x
         self.y = y
-
-        # to by melo byt zvlast ne? ten __init__ se spusti jen jednou
-        # mladej telinger nas to ucil takhle ale ja nevim ja moc nepouzival metody obecne
+        self.clock = pygame.time.Clock()
+        self.running = True
+        self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
+        self.mapa = imgs.mapa
+        self.postavaa = imgs.postava
 
     def hybani(self):
+
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_w] and (keys[pygame.K_d] or keys[pygame.K_a]):
@@ -30,15 +36,10 @@ class Hrac:
             self.y += self.rychlost
         if keys[pygame.K_a] and not keys[pygame.K_d]:
             self.x -= self.rychlost
-
-
-class Hra:
-
-    def __init__(self):
-        self.clock = pygame.time.Clock()
-        self.running = True
-        self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
-        self.mapa = imgs.mapa
+        elif keys[pygame.K_d] and not keys[pygame.K_a]:
+            self.x += self.rychlost
+    def postava(self, y, x):
+        super().__init__(y, x)
 
     def loop(self):
 
@@ -49,7 +50,10 @@ class Hra:
                     self.running = False
                     pygame.quit()
                     sys.exit()
+
+            self.hybani()
             self.screen.blit(self.mapa, (0, 0))
+            self.screen.blit(self.postavaa, (self.x, self.y))
             pygame.display.flip()
             self.clock.tick(60)
 
