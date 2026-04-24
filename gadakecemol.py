@@ -28,7 +28,7 @@ class Hrac:
 class Hra:
 
     def __init__(self):
-        self.screen = pygame.display.set_mode((431, 400))
+        self.screen = pygame.display.set_mode((800, 800))
         self.mapa = pygame.image.load("obrazky/mapa/img.png")
         self.running = True
 
