@@ -2,7 +2,7 @@ import pygame
 import sys
 import pytmx
 
-#testuju verified jen idk
+#testuju verified jen idkaaaa
 # to je trochu random ale videl jsem ze se to takhle delaj aby to bylo prehlednejsi a pak to muzes vsechno zmenit na
 # jednom miste
 import nastaveni as imgs
