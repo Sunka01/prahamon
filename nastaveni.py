@@ -11,7 +11,10 @@ def img(path, size=None):
     return image
 
 
-postava = img("obrazky/predek.png", (33, 40))
+postava = img("obrazky/predek.png", (36, 43))
+zadek = img("obrazky/zadek.png", (36, 43))
+leva = img("obrazky/leva.png", (36, 43))
+prava = img("obrazky/prava.png", (36, 43))
 mapa = img("obrazky/mapa/img.png", (831, 800))
 
 # sem proste davej ty obrazky ono by se to pak moc stradalo, az toho bude vic rozdelime to do vic categories
