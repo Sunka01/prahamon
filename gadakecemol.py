@@ -61,7 +61,7 @@ class Hra:
     def animace(self):
         self.animace_chozeni_ted += 0.2
 
-        if self.animace_chozeni_ted >= 3:
+        if self.animace_chozeni_ted >= 4:
             self.animace_chozeni_ted = 0
 
     def loop(self):
