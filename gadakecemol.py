@@ -92,10 +92,13 @@ class Hra:
             self.camera_x = max(0, min(self.camera_x, self.map_width - imgs.sirka_okna))
             self.camera_y = max(0, min(self.camera_y, self.map_height - imgs.vyska_okna))
 
+            mchitbox = pygame.Rect(self.x - self.camera_x + 10,self.y - self.camera_y + 16,self.postava_width - 20,self.postava_height - 16)
+
             mapa.draw_map(self.screen, self.map, self.camera_x, self.camera_y)
             self.text = self.font.render(self.dialog, False, (0, 0, 0))
             self.screen.blit(imgs.oak, (1620 - self.camera_x, 1420 - self.camera_y))
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
+            pygame.draw.rect(self.screen, (255, 0, 0), mchitbox, 2)
 
             if self.show == True:
 
