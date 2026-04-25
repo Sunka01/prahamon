@@ -1,7 +1,7 @@
 import pygame
 
-sirka_okna = 831
-vyska_okna = 800
+sirka_okna = 800
+vyska_okna = 600
 
 
 def img(path, size=None):
