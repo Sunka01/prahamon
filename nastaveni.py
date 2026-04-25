@@ -1,7 +1,7 @@
 import pygame
 
-sirka_okna = 800
-vyska_okna = 600
+sirka_okna = 1280
+vyska_okna = 800
 
 
 def img(path, size=None):
@@ -17,5 +17,6 @@ zadek = img("obrazky/zadek.png", velikost_postavy)
 leva = img("obrazky/leva.png", velikost_postavy)
 prava = img("obrazky/prava.png", velikost_postavy)
 mapa = img("obrazky/mapa/img.png", velikost_postavy)
+dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
 
 # sem proste davej ty obrazky ono by se to pak moc stradalo, az toho bude vic rozdelime to do vic categories
