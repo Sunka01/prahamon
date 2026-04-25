@@ -21,7 +21,7 @@ class Hra:
         self.dialog = "None"
         self.font = pygame.font.Font("pokemon_pixel_font.ttf", 64)
         self.animace_chozeni_ted = 0
-
+        self.show = False
 
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
@@ -57,7 +57,6 @@ class Hra:
             self.x += self.rychlost
             self.postava = imgs.prava[int(self.animace_chozeni_ted)]
 
-
     def animace(self):
         self.animace_chozeni_ted += 0.2
 
@@ -74,11 +73,16 @@ class Hra:
                     pygame.quit()
                     sys.exit()
 
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_e:
-                        self.dialog = dialogy.dialog1
-                    elif event.key == pygame.K_r:
-                        self.dialog = dialogy.dialog2
+            keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_e]:
+                self.dialog = dialogy.dialog1
+                self.show = True
+            elif keys[pygame.K_r]:
+                self.dialog = dialogy.dialog2
+                self.show = True
+            else:
+                self.show = False
 
             self.hybani()
             self.x = max(0, min(self.x, self.map_width - self.postava_width))
@@ -90,9 +94,13 @@ class Hra:
 
             mapa.draw_map(self.screen, self.map, self.camera_x, self.camera_y)
             self.text = self.font.render(self.dialog, False, (0, 0, 0))
+            self.screen.blit(imgs.oak, (1620 - self.camera_x, 1420 - self.camera_y))
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
-            self.screen.blit(imgs.dialogoveokno,(200, 600))
-            self.screen.blit(self.text, (250, 640))
+
+            if self.show == True:
+
+                self.screen.blit(imgs.dialogoveokno, (200, 600))
+                self.screen.blit(self.text, (250, 640))
             self.animace()
             pygame.display.flip()
             self.clock.tick(60)

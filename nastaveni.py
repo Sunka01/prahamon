@@ -11,7 +11,10 @@ def img(path, size=None):
     return image
 
 
-velikost_postavy = (128, 128)
+velikost_postavy = (96, 96)
+
+oak = img("obrazky/oak.png", velikost_postavy)
+
 postava = []
 postava.append(img("obrazky/predek_1.png", velikost_postavy))
 postava.append(img("obrazky/predek_2.png", velikost_postavy))
