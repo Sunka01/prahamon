@@ -38,10 +38,13 @@ class Hra:
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_LSHIFT]:
+            if imgs.rychlost_animace_chuze == 0.2:
+                imgs.rychlost_animace_chuze = 0.4
             if self.rychlost <= 8:
                 self.rychlost = self.rychlost + 1
         else:
             self.rychlost = 4
+            imgs.rychlost_animace_chuze = 0.2
 
         if keys[pygame.K_w] and (keys[pygame.K_d] or keys[pygame.K_a]):
             self.y -= self.rychlost
@@ -58,8 +61,10 @@ class Hra:
             self.x += self.rychlost
             self.postava = imgs.prava[int(self.animace_chozeni_ted)]
 
+
+
     def animace(self):
-        self.animace_chozeni_ted += 0.2
+        self.animace_chozeni_ted += imgs.rychlost_animace_chuze
 
         if self.animace_chozeni_ted >= 4:
             self.animace_chozeni_ted = 0
@@ -93,7 +98,7 @@ class Hra:
             self.camera_x = max(0, min(self.camera_x, self.map_width - imgs.sirka_okna))
             self.camera_y = max(0, min(self.camera_y, self.map_height - imgs.vyska_okna))
 
-            mchitbox = pygame.Rect(self.x + 10 - self.camera_x, self.y + 16 - self.camera_y, self.postava_width - 20, self.postava_height - 16)
+            mchitbox = pygame.Rect(self.x + 5 - self.camera_x, self.y + 8 - self.camera_y, self.postava_width - 10, self.postava_height - 8)
             oakhitbox = pygame.Rect(1620, 1420, imgs.oak.get_width(), imgs.oak.get_height())
             mchitboxcol = pygame.Rect(self.x + 10, self.y + 16, self.postava_width - 20, self.postava_height - 16)
 
@@ -103,14 +108,13 @@ class Hra:
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
             pygame.draw.rect(self.screen, (255, 0, 0), mchitbox, 2)
-            pygame.draw.rect(self.screen, (255, 255, 0), (
-                oakhitbox.x - self.camera_x, oakhitbox.y - self.camera_y, oakhitbox.width, oakhitbox.height), 2)
+            pygame.draw.rect(self.screen, (255, 255, 0), (oakhitbox.x - self.camera_x, oakhitbox.y - self.camera_y, oakhitbox.width, oakhitbox.height), 2)
 
             if mchitboxcol.colliderect(oakhitbox):
                 self.kolize = True
             else:
                 self.kolize = False
-            if self.show == True and self.kolize == True:
+            if self.kolize == True:
                 self.screen.blit(imgs.dialogoveokno, (200, 600))
                 self.screen.blit(self.text, (250, 640))
             self.animace()

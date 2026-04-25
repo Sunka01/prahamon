@@ -2,6 +2,7 @@ import pygame
 
 sirka_okna = 1280
 vyska_okna = 800
+rychlost_animace_chuze = 0.2
 
 
 def img(path, size=None):
