@@ -10,15 +10,19 @@ pygame.init()
 
 class Hra:
 
-    def __init__(self, x=100, y=100, rychlost=2):
+    def __init__(self, x=100, y=100, rychlost=20):
         self.rychlost = rychlost
         self.x = x
         self.y = y
         self.clock = pygame.time.Clock()
         self.running = True
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
-        self.map = pytmx.load_pygame("random ass mapa xd.tmx", pixelalpha=True)
+        self.map = pytmx.load_pygame("map.tmx", pixelalpha=True)
+        self.map_width = self.map.width * self.map.tilewidth
+        self.map_height = self.map.height * self.map.tileheight
         self.postava = imgs.postava
+        self.postava_height = self.postava.get_height()
+        self.postava_width = self.postava.get_width()
 
     def hybani(self):
 
@@ -39,6 +43,8 @@ class Hra:
             self.x += self.rychlost
             self.postava = imgs.prava
 
+
+
     def loop(self):
 
         while self.running:
@@ -50,8 +56,16 @@ class Hra:
                     sys.exit()
 
             self.hybani()
-            mapa.draw_map(self.screen, self.map)
-            self.screen.blit(self.postava, (self.x, self.y))
+
+            self.x = max(0, min(self.x, self.map_width - self.postava_width))
+            self.y = max(0, min(self.y, self.map_height - self.postava_height))
+            self.camera_x = self.x - imgs.sirka_okna // 2
+            self.camera_y = self.y - imgs.vyska_okna // 2
+            self.camera_x = max(0, min(self.camera_x, self.map_width - imgs.sirka_okna))
+            self.camera_y = max(0, min(self.camera_y, self.map_height - imgs.vyska_okna))
+
+            mapa.draw_map(self.screen, self.map, self.camera_x, self.camera_y)
+            self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
             pygame.display.flip()
             self.clock.tick(60)
 
