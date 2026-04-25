@@ -19,7 +19,7 @@ class Hra:
         self.clock = pygame.time.Clock()
         self.running = True
         self.dialog = "None"
-        self.font = pygame.font.Font("pixelfont.ttf", 64)
+        self.font = pygame.font.Font("pokemon_pixel_font.ttf", 64)
 
 
         # --- MAPA --- #
