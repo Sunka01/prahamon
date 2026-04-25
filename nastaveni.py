@@ -11,11 +11,32 @@ def img(path, size=None):
     return image
 
 
-velikost_postavy = (51, 64)
-postava = img("obrazky/predek.png", velikost_postavy)
-zadek = img("obrazky/zadek.png", velikost_postavy)
-leva = img("obrazky/leva.png", velikost_postavy)
-prava = img("obrazky/prava.png", velikost_postavy)
+velikost_postavy = (128, 128)
+postava = []
+postava.append(img("obrazky/predek_1.png", velikost_postavy))
+postava.append(img("obrazky/predek_2.png", velikost_postavy))
+postava.append(img("obrazky/predek_3.png", velikost_postavy))
+postava.append(img("obrazky/predek_4.png", velikost_postavy))
+
+zadek = []
+zadek.append(img("obrazky/zadek_1.png", velikost_postavy))
+zadek.append(img("obrazky/zadek_2.png", velikost_postavy))
+zadek.append(img("obrazky/zadek_3.png", velikost_postavy))
+zadek.append(img("obrazky/zadek_4.png", velikost_postavy))
+
+leva = []
+leva.append(img("obrazky/leva_1.png", velikost_postavy))
+leva.append(img("obrazky/leva_2.png", velikost_postavy))
+leva.append(img("obrazky/leva_3.png", velikost_postavy))
+leva.append(img("obrazky/leva_4.png", velikost_postavy))
+
+prava = []
+prava.append(img("obrazky/prava_1.png", velikost_postavy))
+prava.append(img("obrazky/prava_2.png", velikost_postavy))
+prava.append(img("obrazky/prava_3.png", velikost_postavy))
+prava.append(img("obrazky/prava_4.png", velikost_postavy))
+
+
 mapa = img("obrazky/mapa/img.png", velikost_postavy)
 dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
 

@@ -20,6 +20,7 @@ class Hra:
         self.running = True
         self.dialog = "None"
         self.font = pygame.font.Font("pokemon_pixel_font.ttf", 64)
+        self.animace_chozeni_ted = 0
 
 
         # --- MAPA --- #
@@ -27,7 +28,7 @@ class Hra:
         self.map = pytmx.load_pygame("map.tmx", pixelalpha=True)
         self.map_width = self.map.width * self.map.tilewidth
         self.map_height = self.map.height * self.map.tileheight
-        self.postava = imgs.postava
+        self.postava = imgs.postava[0]
         self.postava_height = self.postava.get_height()
         self.postava_width = self.postava.get_width()
 
@@ -45,16 +46,23 @@ class Hra:
             self.y -= self.rychlost
         elif keys[pygame.K_w]:
             self.y -= self.rychlost
-            self.postava = imgs.zadek
+            self.postava = imgs.zadek[int(self.animace_chozeni_ted)]
         if keys[pygame.K_s]:
             self.y += self.rychlost
-            self.postava = imgs.postava
+            self.postava = imgs.postava[int(self.animace_chozeni_ted)]
         if keys[pygame.K_a] and not keys[pygame.K_d]:
             self.x -= self.rychlost
-            self.postava = imgs.leva
+            self.postava = imgs.leva[int(self.animace_chozeni_ted)]
         elif keys[pygame.K_d] and not keys[pygame.K_a]:
             self.x += self.rychlost
-            self.postava = imgs.prava
+            self.postava = imgs.prava[int(self.animace_chozeni_ted)]
+
+
+    def animace(self):
+        self.animace_chozeni_ted += 0.2
+
+        if self.animace_chozeni_ted >= 3:
+            self.animace_chozeni_ted = 0
 
     def loop(self):
 
@@ -73,7 +81,6 @@ class Hra:
                         self.dialog = dialogy.dialog2
 
             self.hybani()
-
             self.x = max(0, min(self.x, self.map_width - self.postava_width))
             self.y = max(0, min(self.y, self.map_height - self.postava_height))
             self.camera_x = self.x - imgs.sirka_okna // 2
@@ -86,6 +93,7 @@ class Hra:
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
             self.screen.blit(imgs.dialogoveokno,(200, 600))
             self.screen.blit(self.text, (250, 640))
+            self.animace()
             pygame.display.flip()
             self.clock.tick(60)
 
