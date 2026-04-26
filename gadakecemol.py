@@ -54,7 +54,7 @@ class Hra:
                 self.y -= self.rychlost
             elif keys[pygame.K_w]:
                 self.y -= self.rychlost
-            self.postava = imgs.zadek[int(self.animace_chozeni_ted)]
+                self.postava = imgs.zadek[int(self.animace_chozeni_ted)]
             if keys[pygame.K_s]:
                 self.y += self.rychlost
                 self.postava = imgs.postava[int(self.animace_chozeni_ted)]
