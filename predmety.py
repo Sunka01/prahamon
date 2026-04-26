@@ -14,6 +14,7 @@ class Predmet:
 
         if self.visible:
             screen.blit(self.image, (self.x - camera_x, self.y - camera_y))
+            pass
     def sebrano(self, player_rect, inventory):
         if self.visible and player_rect.colliderect(self.hitbox):
             self.visible = False
