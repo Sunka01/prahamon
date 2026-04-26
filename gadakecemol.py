@@ -104,10 +104,15 @@ class Hra:
             oakhitbox = pygame.Rect(1620, 1420, imgs.oak.get_width(), imgs.oak.get_height())
             mchitboxcol = pygame.Rect(self.x + 10, self.y + 16, self.postava_width - 20, self.postava_height - 16)
 
-            mapa.draw_map(self.screen, self.map, self.camera_x, self.camera_y)
+            mapa.vykresli_zem(self.screen, self.map, self.camera_x, self.camera_y)
+
             self.text = self.font.render(self.dialog, False, (0, 0, 0))
+
             self.screen.blit(imgs.oak, (1620 - self.camera_x, 1420 - self.camera_y))
+
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
+
+            mapa.vykresli_vrchy_stromu(self.screen, self.map, self.camera_x, self.camera_y)
 
             pygame.draw.rect(self.screen, (255, 0, 0), mchitbox, 2)
             pygame.draw.rect(self.screen, (255, 255, 0), (oakhitbox.x - self.camera_x, oakhitbox.y - self.camera_y, oakhitbox.width, oakhitbox.height), 2)
