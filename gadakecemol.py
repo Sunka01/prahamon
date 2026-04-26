@@ -30,6 +30,7 @@ class Hra:
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
         self.map = pytmx.load_pygame("map.tmx", pixelalpha=True)
+        self.zdi = mapa.nacti_hitboxy_mapy(self.map)
         self.map_width = self.map.width * self.map.tilewidth
         self.map_height = self.map.height * self.map.tileheight
 
@@ -110,6 +111,10 @@ class Hra:
 
             pygame.draw.rect(self.screen, (255, 0, 0), mchitbox, 2)
             pygame.draw.rect(self.screen, (255, 255, 0), (oakhitbox.x - self.camera_x, oakhitbox.y - self.camera_y, oakhitbox.width, oakhitbox.height), 2)
+
+            for zed in self.zdi:
+                pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
+
 
             if mchitboxcol.colliderect(oakhitbox):
                 self.kolize = True
