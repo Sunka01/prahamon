@@ -1,9 +1,12 @@
 import pygame
 import pytmx
+
+import dialogy
 import mapa
 import nabidka
 import eventy
 import inventar
+import npc
 import predmety
 
 import nastaveni as imgs
@@ -26,6 +29,7 @@ class Hra:
         self.animace_chozeni_ted = 0
         self.show = False
         self.kolize = False
+        self.kolizenpc = None
         self.menu = False
         self.pozicemenu = pozicemenu
         self.poziceinventare = poziceinventare
@@ -41,6 +45,11 @@ class Hra:
             predmety.Predmet("pivko5", imgs.pivko, 1520, 820),
             predmety.Predmet("pivko6", imgs.pivko, 1520, 720),
             # sem muzes davat predmety
+        ]
+        self.npc = [
+            npc.Npc("oak", imgs.oak, 1620, 1420, dialog=dialogy.dialog1),
+            npc.Npc("ptak", imgs.ptak, 1420, 1420, dialog=dialogy.dialog2)
+            # sem muzes davat npcs
         ]
 
         # --- MAPA --- #
@@ -115,7 +124,6 @@ class Hra:
 
             self.mchitbox = pygame.Rect(self.x + 5 - self.camera_x, self.y + 8 - self.camera_y, self.postava_width - 10,
                                         self.postava_height - 8)
-            self.oakhitbox = pygame.Rect(1620, 1420, imgs.oak.get_width(), imgs.oak.get_height())
             self.mchitboxcol = pygame.Rect(self.x + 10, self.y + 16, self.postava_width - 20, self.postava_height - 16)
 
 
@@ -123,27 +131,30 @@ class Hra:
 
             self.text = self.font.render(self.dialog, False, (0, 0, 0))
 
-            self.screen.blit(imgs.oak, (1620 - self.camera_x, 1420 - self.camera_y))
+            self.kolize = False
+            self.kolizenpc = None
+
+            for item in self.npc:
+                item.draw(self.screen, self.camera_x, self.camera_y)
+
+            for item in self.predmety:
+                item.draw(self.screen, self.camera_x, self.camera_y)
 
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
             mapa.vykresli_vrchy_stromu(self.screen, self.map, self.camera_x, self.camera_y)
 
             pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
-            pygame.draw.rect(self.screen, (255, 255, 0), (
-                self.oakhitbox.x - self.camera_x, self.oakhitbox.y - self.camera_y, self.oakhitbox.width,
-                self.oakhitbox.height), 2)
-            for item in self.predmety:
-                item.draw(self.screen, self.camera_x, self.camera_y)
 
             for zed in self.zdi:
                 pass
                 # pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
 
-            if self.mchitboxcol.colliderect(self.oakhitbox):
-                self.kolize = True
-            else:
-                self.kolize = False
+            for item in self.npc:
+                if item.kolize(self.mchitboxcol):
+                    self.kolize = True
+                    self.kolizenpc = item
+                    break
 
             if self.kolize and self.show:
                 self.screen.blit(imgs.dialogoveokno, (200, 600))

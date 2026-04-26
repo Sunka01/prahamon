@@ -11,9 +11,11 @@ def handle(hra, event):
 
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_e:
-            if hra.kolize:
-                hra.dialog = dialogy.dialog1
-                hra.show = not hra.show
+            if hra.show:
+                hra.show = False
+            elif hra.kolize and hra.kolizenpc:
+                hra.dialog = hra.kolizenpc.dialog
+                hra.show = True
             for item in hra.predmety:
                 item.sebrano(hra.mchitboxcol, inventar.inventory)
 
