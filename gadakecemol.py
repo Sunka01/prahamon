@@ -30,6 +30,7 @@ class Hra:
         self.map = pytmx.load_pygame("map.tmx", pixelalpha=True)
         self.map_width = self.map.width * self.map.tilewidth
         self.map_height = self.map.height * self.map.tileheight
+
         self.postava = imgs.postava[0]
         self.postava_height = self.postava.get_height()
         self.postava_width = self.postava.get_width()
@@ -39,10 +40,9 @@ class Hra:
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_LSHIFT]:
-            if imgs.rychlost_animace_chuze == 0.2:
-                imgs.rychlost_animace_chuze = 0.4
+            imgs.rychlost_animace_chuze = 0.4
             if self.rychlost <= 8:
-                self.rychlost = self.rychlost + 1
+                self.rychlost += 1
         else:
             self.rychlost = 4
             imgs.rychlost_animace_chuze = 0.2
@@ -65,9 +65,15 @@ class Hra:
 
 
     def animace(self):
-        self.animace_chozeni_ted += imgs.rychlost_animace_chuze
+        keys = pygame.key.get_pressed()
+        hybe_se = keys[pygame.K_w] or keys[pygame.K_s] or keys[pygame.K_d] or keys[pygame.K_a]
 
-        if self.animace_chozeni_ted >= 4:
+        if hybe_se:
+            self.animace_chozeni_ted += imgs.rychlost_animace_chuze
+
+            if self.animace_chozeni_ted >= 4:
+                self.animace_chozeni_ted = 0
+        else:
             self.animace_chozeni_ted = 0
 
     def loop(self):
