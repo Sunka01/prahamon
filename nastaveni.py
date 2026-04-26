@@ -43,6 +43,7 @@ prava.append(img("obrazky/prava_4.png", velikost_postavy))
 
 mapa = img("obrazky/mapa/img.png", velikost_postavy)
 dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
-menu = img("obrazky/menu.png", (300,400))
+menu = img("obrazky/menu.png", (350, 400))
+sipka = img("obrazky/sipka.png", (60, 60))
 
 # sem proste davej ty obrazky ono by se to pak moc stradalo, az toho bude vic rozdelime to do vic categories

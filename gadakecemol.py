@@ -3,6 +3,7 @@ import sys
 import pytmx
 import mapa
 import dialogy
+import nabidka
 
 import nastaveni as imgs
 
@@ -12,7 +13,7 @@ pygame.font.init()
 
 class Hra:
 
-    def __init__(self, x=100, y=100, rychlost=4):
+    def __init__(self, x=310, y=360, rychlost=4, pozicemenu=1):
         self.rychlost = rychlost
         self.x = x
         self.y = y
@@ -24,6 +25,7 @@ class Hra:
         self.show = False
         self.kolize = False
         self.menu = False
+        self.pozicemenu = pozicemenu
 
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
@@ -47,20 +49,23 @@ class Hra:
             self.rychlost = 4
             imgs.rychlost_animace_chuze = 0.2
 
-        if keys[pygame.K_w] and (keys[pygame.K_d] or keys[pygame.K_a]):
-            self.y -= self.rychlost
-        elif keys[pygame.K_w]:
-            self.y -= self.rychlost
+        if self.menu == False:
+
+            if keys[pygame.K_w] and (keys[pygame.K_d] or keys[pygame.K_a]):
+                self.y -= self.rychlost
+            elif keys[pygame.K_w]:
+                self.y -= self.rychlost
             self.postava = imgs.zadek[int(self.animace_chozeni_ted)]
-        if keys[pygame.K_s]:
-            self.y += self.rychlost
-            self.postava = imgs.postava[int(self.animace_chozeni_ted)]
-        if keys[pygame.K_a] and not keys[pygame.K_d]:
-            self.x -= self.rychlost
-            self.postava = imgs.leva[int(self.animace_chozeni_ted)]
-        elif keys[pygame.K_d] and not keys[pygame.K_a]:
-            self.x += self.rychlost
-            self.postava = imgs.prava[int(self.animace_chozeni_ted)]
+            if keys[pygame.K_s]:
+                self.y += self.rychlost
+                self.postava = imgs.postava[int(self.animace_chozeni_ted)]
+            if keys[pygame.K_a] and not keys[pygame.K_d]:
+                self.x -= self.rychlost
+                self.postava = imgs.leva[int(self.animace_chozeni_ted)]
+            elif keys[pygame.K_d] and not keys[pygame.K_a]:
+                self.x += self.rychlost
+                self.postava = imgs.prava[int(self.animace_chozeni_ted)]
+
 
 
 
@@ -92,14 +97,27 @@ class Hra:
 
                         if self.show:
                             self.show = False
-                        elif self.show == False:
+                        elif not self.show:
                             self.show = True
                     if event.key == pygame.K_ESCAPE:
                         if self.menu:
                             self.menu = False
                         elif not self.menu:
                             self.menu = True
+                    elif self.menu:
 
+                        if event.key == pygame.K_w:
+
+                            if self.pozicemenu > 1:
+                                self.pozicemenu -= 1
+                        if event.key == pygame.K_s:
+
+                            if self.pozicemenu < 5:
+                                self.pozicemenu += 1
+                        if self.pozicemenu == 5:
+                            if event.key == pygame.K_e:
+                                pygame.quit()
+                                sys.exit()
             self.hybani()
             self.x = max(0, min(self.x, self.map_width - self.postava_width))
             self.y = max(0, min(self.y, self.map_height - self.postava_height))
@@ -121,7 +139,9 @@ class Hra:
             pygame.draw.rect(self.screen, (255, 255, 0), (oakhitbox.x - self.camera_x, oakhitbox.y - self.camera_y, oakhitbox.width, oakhitbox.height), 2)
 
             if self.menu:
-                self.screen.blit(imgs.menu, (930,30))
+                nabidka.draw(self.screen, imgs, self.font)
+                nabidka.sipecka(self.screen, imgs, self.pozicemenu)
+
 
             if mchitboxcol.colliderect(oakhitbox):
                 self.kolize = True
