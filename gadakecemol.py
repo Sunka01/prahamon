@@ -4,6 +4,7 @@ import pytmx
 import mapa
 import dialogy
 import nabidka
+import eventy
 
 import nastaveni as imgs
 
@@ -80,51 +81,21 @@ class Hra:
                 self.animace_chozeni_ted = 0
         else:
             self.animace_chozeni_ted = 0
+    def camera(self):
+        self.x = max(0, min(self.x, self.map_width - self.postava_width))
+        self.y = max(0, min(self.y, self.map_height - self.postava_height))
+        self.camera_x = self.x - imgs.sirka_okna // 2
+        self.camera_y = self.y - imgs.vyska_okna // 2
+        self.camera_x = max(0, min(self.camera_x, self.map_width - imgs.sirka_okna))
+        self.camera_y = max(0, min(self.camera_y, self.map_height - imgs.vyska_okna))
+
 
     def loop(self):
-
         while self.running:
-
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.running = False
-                    pygame.quit()
-                    sys.exit()
-
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_e:
-                        self.dialog = dialogy.dialog1
-
-                        if self.show:
-                            self.show = False
-                        elif not self.show:
-                            self.show = True
-                    if event.key == pygame.K_ESCAPE:
-                        if self.menu:
-                            self.menu = False
-                        elif not self.menu:
-                            self.menu = True
-                    elif self.menu:
-
-                        if event.key == pygame.K_w:
-
-                            if self.pozicemenu > 1:
-                                self.pozicemenu -= 1
-                        if event.key == pygame.K_s:
-
-                            if self.pozicemenu < 5:
-                                self.pozicemenu += 1
-                        if self.pozicemenu == 5:
-                            if event.key == pygame.K_e:
-                                pygame.quit()
-                                sys.exit()
+                eventy.handle(self, event)
             self.hybani()
-            self.x = max(0, min(self.x, self.map_width - self.postava_width))
-            self.y = max(0, min(self.y, self.map_height - self.postava_height))
-            self.camera_x = self.x - imgs.sirka_okna // 2
-            self.camera_y = self.y - imgs.vyska_okna // 2
-            self.camera_x = max(0, min(self.camera_x, self.map_width - imgs.sirka_okna))
-            self.camera_y = max(0, min(self.camera_y, self.map_height - imgs.vyska_okna))
+            self.camera()
 
             mchitbox = pygame.Rect(self.x + 5 - self.camera_x, self.y + 8 - self.camera_y, self.postava_width - 10, self.postava_height - 8)
             oakhitbox = pygame.Rect(1620, 1420, imgs.oak.get_width(), imgs.oak.get_height())
@@ -138,18 +109,21 @@ class Hra:
             pygame.draw.rect(self.screen, (255, 0, 0), mchitbox, 2)
             pygame.draw.rect(self.screen, (255, 255, 0), (oakhitbox.x - self.camera_x, oakhitbox.y - self.camera_y, oakhitbox.width, oakhitbox.height), 2)
 
+            if mchitboxcol.colliderect(oakhitbox):
+                self.kolize = True
+            else:
+                self.kolize = False
+
+            if self.kolize and self.show:
+                self.screen.blit(imgs.dialogoveokno, (200, 600))
+                self.screen.blit(self.text, (250, 640))
+
             if self.menu:
                 nabidka.draw(self.screen, imgs, self.font)
                 nabidka.sipecka(self.screen, imgs, self.pozicemenu)
 
 
-            if mchitboxcol.colliderect(oakhitbox):
-                self.kolize = True
-            else:
-                self.kolize = False
-            if self.kolize == True and self.show == True:
-                self.screen.blit(imgs.dialogoveokno, (200, 600))
-                self.screen.blit(self.text, (250, 640))
+
             self.animace()
             pygame.display.flip()
             self.clock.tick(60)
