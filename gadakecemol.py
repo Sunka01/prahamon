@@ -23,6 +23,7 @@ class Hra:
         self.animace_chozeni_ted = 0
         self.show = False
         self.kolize = False
+        self.menu = False
 
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
@@ -79,16 +80,19 @@ class Hra:
                     pygame.quit()
                     sys.exit()
 
-            keys = pygame.key.get_pressed()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_e:
+                        self.dialog = dialogy.dialog1
 
-            if keys[pygame.K_e]:
-                self.dialog = dialogy.dialog1
-                self.show = True
-            elif keys[pygame.K_r]:
-                self.dialog = dialogy.dialog2
-                self.show = True
-            else:
-                self.show = False
+                        if self.show:
+                            self.show = False
+                        elif self.show == False:
+                            self.show = True
+                    if event.key == pygame.K_ESCAPE:
+                        if self.menu:
+                            self.menu = False
+                        elif not self.menu:
+                            self.menu = True
 
             self.hybani()
             self.x = max(0, min(self.x, self.map_width - self.postava_width))
@@ -110,11 +114,14 @@ class Hra:
             pygame.draw.rect(self.screen, (255, 0, 0), mchitbox, 2)
             pygame.draw.rect(self.screen, (255, 255, 0), (oakhitbox.x - self.camera_x, oakhitbox.y - self.camera_y, oakhitbox.width, oakhitbox.height), 2)
 
+            if self.menu:
+                self.screen.blit(imgs.menu, (930,30))
+
             if mchitboxcol.colliderect(oakhitbox):
                 self.kolize = True
             else:
                 self.kolize = False
-            if self.kolize == True:
+            if self.kolize == True and self.show == True:
                 self.screen.blit(imgs.dialogoveokno, (200, 600))
                 self.screen.blit(self.text, (250, 640))
             self.animace()
