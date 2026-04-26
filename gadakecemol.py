@@ -8,6 +8,7 @@ import nastaveni as imgs
 
 pygame.init()
 pygame.font.init()
+pygame.display.set_caption("Prahamon")
 
 
 class Hra:
