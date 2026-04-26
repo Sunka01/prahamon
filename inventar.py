@@ -2,7 +2,7 @@ import pygame
 
 
 class Inventory:
-    def __init__(self, capacity=8):
+    def __init__(self, capacity=20):
         self.items = {}
         self.capacity = capacity
 
@@ -24,12 +24,20 @@ class Inventory:
     def has(self, item, amount=1):
         return self.items.get(item, 0) >= amount
 
-    def draw(self, screen, font):
+    def draw(self, screen, font, offset=0, limit=4):
         x, y = 830, 110
-        for item, qty in self.items.items():
+        items = list(self.items.items())
+        visible = items[offset:offset + limit]
+        for item, qty in visible:
             text = font.render(f"{qty}x    {item} ", True, (0, 0, 0))
             screen.blit(text, (x, y))
             y += 120
 
 
-inventory = Inventory(capacity=8)
+def sipecka(screen, imgs, pozice, offset=0):
+    relative_pos = pozice - offset
+    y = 100 + (relative_pos - 1) * 120
+    screen.blit(imgs.sipkainv, (730, y))
+
+
+inventory = Inventory(capacity=20)

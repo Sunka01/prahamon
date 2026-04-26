@@ -46,6 +46,7 @@ inventar = img("obrazky/inventar.png", (sirka_okna, vyska_okna))
 dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
 menu = img("obrazky/menu.png", (350, 400))
 sipka = img("obrazky/sipka.png", (60, 60))
+sipkainv = img("obrazky/sipkainv.png", (60, 60))
 
 # ---- PREDMETY -----
 

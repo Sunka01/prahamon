@@ -42,3 +42,13 @@ def handle(hra, event):
         if hra.show_inventar:
             if event.key == pygame.K_ESCAPE:
                 hra.show_inventar = False
+            if event.key == pygame.K_w:
+                if hra.poziceinventare > 1:
+                    hra.poziceinventare -= 1
+                    if hra.poziceinventare < hra.inventar_offset + 1:
+                        hra.inventar_offset -= 1
+            if event.key == pygame.K_s:
+                if hra.poziceinventare < len(inventar.inventory.items):
+                    hra.poziceinventare += 1
+                    if hra.poziceinventare > hra.inventar_offset + 4:
+                        hra.inventar_offset += 1

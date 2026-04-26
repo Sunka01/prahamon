@@ -15,7 +15,7 @@ pygame.display.set_caption("Prahamon")
 
 class Hra:
 
-    def __init__(self, x=310, y=360, rychlost=4, pozicemenu=1):
+    def __init__(self, x=310, y=360, rychlost=4, pozicemenu=1, poziceinventare=1):
         self.rychlost = rychlost
         self.x = x
         self.y = y
@@ -28,11 +28,18 @@ class Hra:
         self.kolize = False
         self.menu = False
         self.pozicemenu = pozicemenu
+        self.poziceinventare = poziceinventare
         self.prahaball = True
         self.show_inventar = False
+        self.inventar_offset = 0
         self.predmety = [
             predmety.Predmet("prahaball", imgs.prahaball, 1620, 1220),
             predmety.Predmet("pivko", imgs.pivko, 1520, 1220),
+            predmety.Predmet("pivko2", imgs.pivko, 1520, 1120),
+            predmety.Predmet("pivko3", imgs.pivko, 1520, 1020),
+            predmety.Predmet("pivko4", imgs.pivko, 1520, 920),
+            predmety.Predmet("pivko5", imgs.pivko, 1520, 820),
+            predmety.Predmet("pivko6", imgs.pivko, 1520, 720),
             # sem muzes davat predmety
         ]
 
@@ -149,7 +156,8 @@ class Hra:
             if self.show_inventar:
                 self.screen.blit(imgs.inventar, (0, 0))
                 self.screen.blit(self.font.render("INVENTAR", False, (0, 0, 0)), (150, 80))
-                inventar.inventory.draw(self.screen, self.font)
+                inventar.inventory.draw(self.screen, self.font, self.inventar_offset, 4)
+                inventar.sipecka(self.screen, imgs, self.poziceinventare, self.inventar_offset)
 
             self.animace()
             pygame.display.flip()
