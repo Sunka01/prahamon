@@ -13,6 +13,10 @@ def handle(hra, event):
             if hra.kolize:
                 hra.dialog = dialogy.dialog1
                 hra.show = not hra.show
+            if hra.prahaball and hra.mchitboxcol.colliderect(hra.ballhitbox):
+                hra.prahaball = False
+                inventar.inventory.add("prahaball")
+
 
         if event.key == pygame.K_ESCAPE:
             hra.menu = not hra.menu
@@ -28,16 +32,10 @@ def handle(hra, event):
                 pygame.quit()
                 sys.exit()
             elif hra.pozicemenu == 4 and event.key == pygame.K_e:
-                inventar.inventory.add("luk")
+                pass  # TODO: Mapa
             elif hra.pozicemenu == 3 and event.key == pygame.K_e:
-                inventar.inventory.add("sex")
+                pass  # TODO: Mapa
             elif hra.pozicemenu == 2 and event.key == pygame.K_e:
                 pass # TODO: Mapa
             elif hra.pozicemenu == 1 and event.key == pygame.K_e:
-                inventar.inventory.add("prahaball")
-                inventar.inventory.add("kamen")
-                inventar.inventory.add("tvojemama")
-                inventar.inventory.add("sword")
-                inventar.inventory.add("a")
-                inventar.inventory.add("b")
-                inventar.inventory.add("c")
+                pass  # TODO: Mapa
