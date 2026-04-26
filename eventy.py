@@ -37,4 +37,8 @@ def handle(hra, event):
             elif hra.pozicemenu == 2 and event.key == pygame.K_e:
                 pass  # TODO: Mapa
             elif hra.pozicemenu == 1 and event.key == pygame.K_e:
-                pass  # TODO: Mapa
+                hra.show_inventar = True
+
+        if hra.show_inventar:
+            if event.key == pygame.K_ESCAPE:
+                hra.show_inventar = False

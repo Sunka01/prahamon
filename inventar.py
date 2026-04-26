@@ -25,11 +25,11 @@ class Inventory:
         return self.items.get(item, 0) >= amount
 
     def draw(self, screen, font):
-        x, y = 10, 10
+        x, y = 830, 110
         for item, qty in self.items.items():
-            text = font.render(f"{qty}x {item} ", True, (255, 255, 255))
+            text = font.render(f"{qty}x    {item} ", True, (0, 0, 0))
             screen.blit(text, (x, y))
-            y += 65
+            y += 120
 
 
 inventory = Inventory(capacity=8)

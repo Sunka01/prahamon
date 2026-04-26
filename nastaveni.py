@@ -42,6 +42,7 @@ prava.append(img("obrazky/prava_4.png", velikost_postavy))
 
 
 mapa = img("obrazky/mapa/img.png", velikost_postavy)
+inventar = img("obrazky/inventar.png", (sirka_okna, vyska_okna))
 dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
 menu = img("obrazky/menu.png", (350, 400))
 sipka = img("obrazky/sipka.png", (60, 60))

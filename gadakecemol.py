@@ -29,6 +29,7 @@ class Hra:
         self.menu = False
         self.pozicemenu = pozicemenu
         self.prahaball = True
+        self.show_inventar = False
         self.predmety = [
             predmety.Predmet("prahaball", imgs.prahaball, 1620, 1220),
             predmety.Predmet("pivko", imgs.pivko, 1520, 1220),
@@ -145,8 +146,9 @@ class Hra:
                 nabidka.draw(self.screen, imgs, self.font)
                 nabidka.sipecka(self.screen, imgs, self.pozicemenu)
 
-            if self.menu and self.pozicemenu == 1:
-                import inventar
+            if self.show_inventar:
+                self.screen.blit(imgs.inventar, (0, 0))
+                self.screen.blit(self.font.render("INVENTAR", False, (0, 0, 0)), (150, 80))
                 inventar.inventory.draw(self.screen, self.font)
 
             self.animace()
