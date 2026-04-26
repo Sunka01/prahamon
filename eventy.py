@@ -10,8 +10,9 @@ def handle(hra, event):
 
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_e:
-            hra.dialog = dialogy.dialog1
-            hra.show = not hra.show
+            if hra.kolize:
+                hra.dialog = dialogy.dialog1
+                hra.show = not hra.show
 
         if event.key == pygame.K_ESCAPE:
             hra.menu = not hra.menu
