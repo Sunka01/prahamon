@@ -3,6 +3,7 @@ import pytmx
 import mapa
 import nabidka
 import eventy
+import inventar
 
 import nastaveni as imgs
 
@@ -118,7 +119,8 @@ class Hra:
             pygame.draw.rect(self.screen, (255, 255, 0), (oakhitbox.x - self.camera_x, oakhitbox.y - self.camera_y, oakhitbox.width, oakhitbox.height), 2)
 
             for zed in self.zdi:
-                pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
+                pass
+                # pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
 
 
             if mchitboxcol.colliderect(oakhitbox):
@@ -133,6 +135,10 @@ class Hra:
             if self.menu:
                 nabidka.draw(self.screen, imgs, self.font)
                 nabidka.sipecka(self.screen, imgs, self.pozicemenu)
+
+            if self.menu and self.pozicemenu == 1:
+                import inventar
+                inventar.inventory.draw(self.screen, self.font)
 
 
 

@@ -1,6 +1,7 @@
 import pygame
 import sys
 import dialogy
+import inventar
 
 def handle(hra, event):
     if event.type == pygame.QUIT:
@@ -26,11 +27,16 @@ def handle(hra, event):
                 pygame.quit()
                 sys.exit()
             elif hra.pozicemenu == 4 and event.key == pygame.K_e:
-                pass # TODO: Info/Karta hrace idk
+                inventar.inventory.add("luk")
             elif hra.pozicemenu == 3 and event.key == pygame.K_e:
-                pass # TODO: PrahaDex
+                inventar.inventory.add("sex")
             elif hra.pozicemenu == 2 and event.key == pygame.K_e:
                 pass # TODO: Mapa
             elif hra.pozicemenu == 1 and event.key == pygame.K_e:
-                pass # TODO: inventar
-
+                inventar.inventory.add("prahaball")
+                inventar.inventory.add("kamen")
+                inventar.inventory.add("tvojemama")
+                inventar.inventory.add("sword")
+                inventar.inventory.add("a")
+                inventar.inventory.add("b")
+                inventar.inventory.add("c")
