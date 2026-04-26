@@ -3,6 +3,7 @@ import sys
 import dialogy
 import inventar
 
+
 def handle(hra, event):
     if event.type == pygame.QUIT:
         pygame.quit()
@@ -13,10 +14,8 @@ def handle(hra, event):
             if hra.kolize:
                 hra.dialog = dialogy.dialog1
                 hra.show = not hra.show
-            if hra.prahaball and hra.mchitboxcol.colliderect(hra.ballhitbox):
-                hra.prahaball = False
-                inventar.inventory.add("prahaball")
-
+            for item in hra.predmety:
+                item.sebrano(hra.mchitboxcol, inventar.inventory)
 
         if event.key == pygame.K_ESCAPE:
             hra.menu = not hra.menu
@@ -36,6 +35,6 @@ def handle(hra, event):
             elif hra.pozicemenu == 3 and event.key == pygame.K_e:
                 pass  # TODO: Mapa
             elif hra.pozicemenu == 2 and event.key == pygame.K_e:
-                pass # TODO: Mapa
+                pass  # TODO: Mapa
             elif hra.pozicemenu == 1 and event.key == pygame.K_e:
                 pass  # TODO: Mapa

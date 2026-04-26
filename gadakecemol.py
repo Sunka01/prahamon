@@ -4,6 +4,7 @@ import mapa
 import nabidka
 import eventy
 import inventar
+import predmety
 
 import nastaveni as imgs
 
@@ -28,6 +29,11 @@ class Hra:
         self.menu = False
         self.pozicemenu = pozicemenu
         self.prahaball = True
+        self.predmety = [
+            predmety.Predmet("prahaball", imgs.prahaball, 1620, 1220),
+            predmety.Predmet("pivko", imgs.pivko, 1520, 1220),
+            # sem muzes davat predmety
+        ]
 
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
@@ -103,16 +109,13 @@ class Hra:
                                         self.postava_height - 8)
             self.oakhitbox = pygame.Rect(1620, 1420, imgs.oak.get_width(), imgs.oak.get_height())
             self.mchitboxcol = pygame.Rect(self.x + 10, self.y + 16, self.postava_width - 20, self.postava_height - 16)
-            if self.prahaball:
-                self.ballhitbox = pygame.Rect(1620, 1220, imgs.prahaball.get_width(), imgs.prahaball.get_height())
+
 
             mapa.vykresli_zem(self.screen, self.map, self.camera_x, self.camera_y)
 
             self.text = self.font.render(self.dialog, False, (0, 0, 0))
 
             self.screen.blit(imgs.oak, (1620 - self.camera_x, 1420 - self.camera_y))
-            if self.prahaball:
-                self.screen.blit(imgs.prahaball, (1620 - self.camera_x, 1220 - self.camera_y))
 
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
@@ -122,10 +125,8 @@ class Hra:
             pygame.draw.rect(self.screen, (255, 255, 0), (
                 self.oakhitbox.x - self.camera_x, self.oakhitbox.y - self.camera_y, self.oakhitbox.width,
                 self.oakhitbox.height), 2)
-            if self.prahaball:
-                pygame.draw.rect(self.screen, (0, 255, 0), (
-                    self.ballhitbox.x - self.camera_x, self.ballhitbox.y - self.camera_y, self.ballhitbox.width,
-                    self.ballhitbox.height), 2)
+            for item in self.predmety:
+                item.draw(self.screen, self.camera_x, self.camera_y)
 
             for zed in self.zdi:
                 pass

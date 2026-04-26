@@ -46,7 +46,10 @@ dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
 menu = img("obrazky/menu.png", (350, 400))
 sipka = img("obrazky/sipka.png", (60, 60))
 
+# ---- PREDMETY -----
+
 prahaball = img("obrazky/prahabally/prahaballbasic.png", (48, 48))
+pivko = img("obrazky/prahabally/pivko.png", (48, 67))
 
 
 # sem proste davej ty obrazky ono by se to pak moc stradalo, az toho bude vic rozdelime to do vic categories
