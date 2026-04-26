@@ -51,7 +51,7 @@ class Hra:
             self.rychlost = 4
             imgs.rychlost_animace_chuze = 0.2
 
-        if self.menu == False:
+        if not self.menu and not self.show:
 
             if keys[pygame.K_w] and (keys[pygame.K_d] or keys[pygame.K_a]):
                 self.y -= self.rychlost
