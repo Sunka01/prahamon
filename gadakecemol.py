@@ -1,8 +1,6 @@
 import pygame
-import sys
 import pytmx
 import mapa
-import dialogy
 import nabidka
 import eventy
 
@@ -89,6 +87,9 @@ class Hra:
         self.camera_x = max(0, min(self.camera_x, self.map_width - imgs.sirka_okna))
         self.camera_y = max(0, min(self.camera_y, self.map_height - imgs.vyska_okna))
 
+
+        # TODO: Okay musime nejak vymyslet system inventare a prahadexu protoze to je takovy dost ze jsem unsure ale
+        # TODO: possibly to nebude tak tezky, nevim do kdy budu spat takze klidne muzes neco zkusit
 
     def loop(self):
         while self.running:

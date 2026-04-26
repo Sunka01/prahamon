@@ -25,3 +25,12 @@ def handle(hra, event):
             if hra.pozicemenu == 5 and event.key == pygame.K_e:
                 pygame.quit()
                 sys.exit()
+            elif hra.pozicemenu == 4 and event.key == pygame.K_e:
+                pass # TODO: Info/Karta hrace idk
+            elif hra.pozicemenu == 3 and event.key == pygame.K_e:
+                pass # TODO: PrahaDex
+            elif hra.pozicemenu == 2 and event.key == pygame.K_e:
+                pass # TODO: Mapa
+            elif hra.pozicemenu == 1 and event.key == pygame.K_e:
+                pass # TODO: inventar
+
