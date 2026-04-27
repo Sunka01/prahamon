@@ -1,7 +1,7 @@
 import pygame
 import pytmx
 
-import dialogy
+import databaze
 import mapa
 import nabidka
 import eventy
@@ -50,11 +50,19 @@ class Hra:
             # sem muzes davat predmety
         ]
         self.npc = [
-            npc.Npc("oak", imgs.oak, 1620, 1420, dialog=dialogy.dialog1),
-            npc.Npc("ptak", imgs.ptak, 1420, 1420, dialog=dialogy.dialog2),
+            npc.Npc("oak", imgs.oak, 1620, 1420, dialog=databaze.dialog1),
+            npc.Npc("ptak", imgs.ptak, 1420, 1420, dialog=databaze.dialog2),
             npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog="",)]
             # sem muzes davat npcs
 
+        self.prahamon = [
+            npc.Prahamon("ptak",15),
+            npc.Prahamon("ptak2",20)
+            # prahamoni
+        ]
+
+        for p in self.prahamon:
+            prahadex.prahadex.add(p)
 
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
@@ -149,7 +157,7 @@ class Hra:
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
 
-            #pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
+            pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
 
             for zed in self.zdi:
                 pass

@@ -1,6 +1,6 @@
 import pygame
 import sys
-import dialogy
+import databaze
 import inventar
 import prahadex
 
@@ -66,7 +66,7 @@ def handle(hra, event):
                     if hra.poziceinventare < hra.inventar_offset + 1:
                         hra.inventar_offset -= 1
             if event.key == pygame.K_s:
-                if hra.poziceinventare < len(prahadex.prahadex.items):
+                if hra.poziceinventare < len(prahadex.prahadex.prahamoni):
                     hra.poziceinventare += 1
                     if hra.poziceinventare > hra.inventar_offset + 4:
                         hra.inventar_offset += 1

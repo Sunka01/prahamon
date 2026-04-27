@@ -1,35 +1,30 @@
 import pygame
+import npc
 
 
 class Prahadex:
-    def __init__(self, hp,capacity=999):
-        self.items = {}
-        self.hp = hp
-        self.ability = []
+    def __init__(self, capacity = 999):
+        self.prahamoni = {}
         self.capacity = capacity
 
-    def add(self, item, hp, amount=1):
-        self.hp = hp
-        self.items[item] = self.items.get(item, 0) + amount
+    def add(self, prahamon):
+        self.prahamoni[prahamon.name] = prahamon
         return True
 
     def remove(self, item, amount=1):
-        if self.items.get(item, 0) >= amount:
-            self.items[item] -= amount
-            if self.items[item] == 0:
-                del self.items[item]
+        if self.prahamoni.get(item, 0) >= amount:
+            self.prahamoni[item] -= amount
+            if self.prahamoni[item] == 0:
+                del self.prahamoni[item]
             return True
         return False
 
-    def has(self, item, amount=1):
-        return self.items.get(item, 0) >= amount
-
     def draw(self, screen, font, offset=0, limit=4):
         x, y = 830, 110
-        items = list(self.items.items())
+        items = list(self.prahamoni.values())  # ← .values() not .pm()
         visible = items[offset:offset + limit]
-        for item, qty in visible:
-            text = font.render(f"{item} : {self.hp}hp", True, (0, 0, 0))
+        for p in visible:
+            text = font.render(f"{p.name} : {p.hp}hp", True, (0, 0, 0))
             screen.blit(text, (x, y))
             y += 120
 
@@ -40,4 +35,4 @@ def sipecka(screen, imgs, pozice, offset=0):
     screen.blit(imgs.sipkainv, (730, y))
 
 
-prahadex = Prahadex(capacity=999,hp = 100)
+prahadex = Prahadex()
