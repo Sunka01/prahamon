@@ -149,11 +149,11 @@ class Hra:
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
 
-            pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
+            #pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
 
             for zed in self.zdi:
                 pass
-                # pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
+                #pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
 
             for item in self.npc:
                 if item.kolize(self.mchitboxcol):

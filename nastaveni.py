@@ -16,7 +16,7 @@ velikost_postavy = (96, 96)
 
 oak = img("obrazky/oak.png", (51,64))
 ptak = img("obrazky/ptak.png", (51, 64))
-babisek = img("obrazky/babisek.png", (90, 90))
+babisek = img("obrazky/babisek.png", (64, 64))
 
 
 postava = []
