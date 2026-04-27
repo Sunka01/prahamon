@@ -5,6 +5,8 @@ import inventar
 import prahadex
 
 
+
+
 def handle(hra, event):
     if event.type == pygame.QUIT:
         pygame.quit()
@@ -22,6 +24,9 @@ def handle(hra, event):
 
         if event.key == pygame.K_ESCAPE:
             hra.menu = not hra.menu
+
+        if event.key == pygame.K_h:
+            hra.oak_chce_jit = True
 
         if hra.menu:
             if not hra.show_inventar or not hra.show_prahadex:

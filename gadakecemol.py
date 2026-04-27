@@ -39,6 +39,7 @@ class Hra:
         self.show_inventar = False
         self.show_prahadex = False
         self.inventar_offset = 0
+        self.oak_chce_jit = False
         self.predmety = [
             predmety.Predmet("prahaball", imgs.prahaball, 1620, 1220),
             predmety.Predmet("pivko", imgs.pivko, 1520, 1220),
@@ -74,6 +75,17 @@ class Hra:
         self.postava = imgs.postava[0]
         self.postava_height = self.postava.get_height()
         self.postava_width = self.postava.get_width()
+
+    def npc_movement(self):
+        cil_y = 1620
+        cil_x = 1200
+        rychlost = 2
+
+        if self.npc[0].y < cil_y:
+            self.npc[0].y += rychlost
+
+        if self.npc[0].x > cil_x and self.npc[0].y == cil_y:
+            self.npc[0].x -= rychlost
 
 
 
@@ -136,6 +148,9 @@ class Hra:
             self.hybani()
             self.camera()
 
+            if hra.oak_chce_jit:
+                hra.npc_movement()
+
             self.mchitbox = pygame.Rect(self.x + 5 - self.camera_x, self.y + 8 - self.camera_y, self.postava_width - 10,
                                         self.postava_height - 8)
             self.mchitboxcol = pygame.Rect(self.x + 10, self.y + 16, self.postava_width - 20, self.postava_height - 16)
@@ -156,9 +171,10 @@ class Hra:
 
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
-
-            pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
-
+            """HITBOXY"""
+            """MAIN CHARACTER"""
+            #pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
+            """ZDI"""
             for zed in self.zdi:
                 pass
                 #pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
