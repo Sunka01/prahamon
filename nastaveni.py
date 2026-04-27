@@ -16,6 +16,8 @@ velikost_postavy = (96, 96)
 
 oak = img("obrazky/oak.png", (51,64))
 ptak = img("obrazky/ptak.png", (51, 64))
+babisek = img("obrazky/babisek.png", (70, 70))
+
 
 postava = []
 postava.append(img("obrazky/predek_1.png", velikost_postavy))

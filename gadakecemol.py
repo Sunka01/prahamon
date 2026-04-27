@@ -11,6 +11,7 @@ import predmety
 import prahadex
 
 import nastaveni as imgs
+from npc import *
 
 pygame.init()
 pygame.font.init()
@@ -50,9 +51,11 @@ class Hra:
         ]
         self.npc = [
             npc.Npc("oak", imgs.oak, 1620, 1420, dialog=dialogy.dialog1),
-            npc.Npc("ptak", imgs.ptak, 1420, 1420, dialog=dialogy.dialog2)
+            npc.Npc("ptak", imgs.ptak, 1420, 1420, dialog=dialogy.dialog2),
+            npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog="",)]
             # sem muzes davat npcs
-        ]
+
+
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
         self.map = pytmx.load_pygame("map.tmx", pixelalpha=True)
@@ -64,8 +67,7 @@ class Hra:
         self.postava_height = self.postava.get_height()
         self.postava_width = self.postava.get_width()
 
-        prahadex.prahadex.add("ptak")
-        prahadex.prahadex.add("ptak2")
+
 
     def hybani(self):
 

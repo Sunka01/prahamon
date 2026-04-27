@@ -1,4 +1,6 @@
 import pygame
+import random
+import prahadex
 
 
 class Npc:
@@ -17,3 +19,16 @@ class Npc:
 
     def kolize(self, hrachitbox):
         return hrachitbox.colliderect(self.hitbox)
+
+class Prahamon:
+    def __init__(self, name, hp, image, x, y):
+        self.name = name
+        self.hp = hp
+        self.image = image
+        self.x = x
+        self.y = y
+        self.visible = True
+
+    #def pridej_prahamon(self):
+
+
