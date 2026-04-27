@@ -26,7 +26,7 @@ class Prahadex:
         for p in visible:
             text = font.render(f"{p.name} : {p.hp}hp", True, (0, 0, 0))
             screen.blit(text, (x, y))
-            y += 120
+            y += 120    
 
 
 def sipecka(screen, imgs, pozice, offset=0):

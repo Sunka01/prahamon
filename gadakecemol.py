@@ -52,7 +52,7 @@ class Hra:
         self.npc = [
             npc.Npc("oak", imgs.oak, 1620, 1420, dialog=databaze.dialog1),
             npc.Npc("ptak", imgs.ptak, 1420, 1420, dialog=databaze.dialog2),
-            npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog="",)]
+            npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog="...",)]
             # sem muzes davat npcs
 
         self.prahamon = [
