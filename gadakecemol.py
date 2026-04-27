@@ -148,7 +148,6 @@ class Hra:
 
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
-            mapa.vykresli_vrchy_stromu(self.screen, self.map, self.camera_x, self.camera_y)
 
             pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
 
