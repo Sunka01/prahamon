@@ -8,6 +8,7 @@ import eventy
 import inventar
 import npc
 import predmety
+import prahadex
 
 import nastaveni as imgs
 
@@ -35,6 +36,7 @@ class Hra:
         self.poziceinventare = poziceinventare
         self.prahaball = True
         self.show_inventar = False
+        self.show_prahadex = False
         self.inventar_offset = 0
         self.predmety = [
             predmety.Predmet("prahaball", imgs.prahaball, 1620, 1220),
@@ -51,7 +53,6 @@ class Hra:
             npc.Npc("ptak", imgs.ptak, 1420, 1420, dialog=dialogy.dialog2)
             # sem muzes davat npcs
         ]
-
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
         self.map = pytmx.load_pygame("map.tmx", pixelalpha=True)
@@ -62,6 +63,9 @@ class Hra:
         self.postava = imgs.postava[0]
         self.postava_height = self.postava.get_height()
         self.postava_width = self.postava.get_width()
+
+        prahadex.prahadex.add("ptak")
+        prahadex.prahadex.add("ptak2")
 
     def hybani(self):
 
@@ -169,6 +173,12 @@ class Hra:
                 self.screen.blit(self.font.render("INVENTAR", False, (0, 0, 0)), (150, 80))
                 inventar.inventory.draw(self.screen, self.font, self.inventar_offset, 4)
                 inventar.sipecka(self.screen, imgs, self.poziceinventare, self.inventar_offset)
+
+            if self.show_prahadex:
+                self.screen.blit(imgs.prahadex, (0, 0))
+                self.screen.blit(self.font.render("PRAHADEX", False, (0, 0, 0)), (150, 80))
+                prahadex.prahadex.draw(self.screen,self.font,self.inventar_offset, 4)
+                prahadex.sipecka(self.screen,imgs,self.poziceinventare, self.inventar_offset)
 
             self.animace()
             pygame.display.flip()
