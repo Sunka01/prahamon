@@ -176,13 +176,7 @@ class Hra:
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
             """HITBOXY"""
-            for id in self.npc:
-                pygame.draw.rect(self.screen, (255, 0, 255), (
-                    id.hitbox.x - self.camera_x,
-                    id.hitbox.y - self.camera_y,
-                    id.hitbox.width,
-                    id.hitbox.height
-                ), 4)
+            # for id in self.npc: pygame.draw.rect(self.screen, (255, 0, 255), (id.hitbox.x - self.camera_x,id.hitbox.y - self.camera_y,id.hitbox.width,id.hitbox.height), 4)
 
             """MAIN CHARACTER"""
             #pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
