@@ -21,7 +21,7 @@ class Prahadex:
 
     def draw(self, screen, font, offset=0, limit=4):
         x, y = 830, 110
-        items = list(self.prahamoni.values())  # ← .values() not .pm()
+        items = list(self.prahamoni.values())
         visible = items[offset:offset + limit]
         for p in visible:
             text = font.render(f"{p.name} : {p.hp}hp", True, (0, 0, 0))

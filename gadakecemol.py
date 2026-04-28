@@ -1,5 +1,6 @@
 import databaze, mapa, nabidka, eventy, inventar, npc, predmety, pygame, pytmx
 import nastaveni as imgs
+import shop
 from npc import *
 
 pygame.init()
@@ -19,17 +20,26 @@ class Hra:
         self.font = pygame.font.Font("pokemon_pixel_font.ttf", 64)
         self.animace_chozeni_ted = 0
         self.show = False
+
         self.kolize = False
         self.kolizenpc = None
+
         self.menu = False
+
         self.pozicemenu = pozicemenu
         self.poziceinventare = poziceinventare
-        self.prahaball = True
+
         self.show_inventar = False
         self.show_prahadex = False
         self.show_mapa = False
         self.inventar_offset = 0
+
         self.oak_chce_jit = False
+
+        self.penize = 101
+        self.shop = False
+        self.shopopen = False
+
         self.predmety = [
             predmety.Predmet("prahaball", imgs.prahaball, 1620, 1220),
             predmety.Predmet("pivko", imgs.pivko, 1520, 1220),
@@ -44,11 +54,10 @@ class Hra:
             npc.Npc("oak", imgs.oak, 1620, 1420, dialog=databaze.dialog1),
             npc.Npc("ptak", imgs.ptak, 1420, 1420, dialog=databaze.dialog2),
             npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog="..."),
-            npc.Npc("cong", imgs.cong, 660, 420, dialog="ding dong bong")
+            npc.Npc("cong", imgs.cong, 660, 420)
         ]
             # sem muzes davat npcs
 
-        self.hitboxoak = self.npc[0].hitbox
 
         self.prahamon = [
             npc.Prahamon("ptak",15),
@@ -98,7 +107,7 @@ class Hra:
             self.rychlost = 4
             imgs.rychlost_animace_chuze = 0.2
 
-        if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_prahadex and not self.show_inventar:
+        if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_prahadex and not self.show_inventar and not self.shop:
 
 
             if keys[pygame.K_w]:
@@ -167,7 +176,13 @@ class Hra:
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
             """HITBOXY"""
-            pygame.draw.rect(self.screen, (255, 0, 255), self.npc[0].hitbox, 4)
+            for id in self.npc:
+                pygame.draw.rect(self.screen, (255, 0, 255), (
+                    id.hitbox.x - self.camera_x,
+                    id.hitbox.y - self.camera_y,
+                    id.hitbox.width,
+                    id.hitbox.height
+                ), 4)
 
             """MAIN CHARACTER"""
             #pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
@@ -181,10 +196,6 @@ class Hra:
                     self.kolize = True
                     self.kolizenpc = item
                     break
-
-            if self.kolize and self.show:
-                self.screen.blit(imgs.dialogoveokno, (200, 600))
-                self.screen.blit(self.text, (250, 640))
 
             if self.menu:
                 nabidka.draw(self.screen, imgs, self.font)
@@ -205,6 +216,17 @@ class Hra:
             if self.show_mapa:
                 self.screen.blit(imgs.mapicka, (0, 0))
                 self.screen.blit(self.font.render("PRAHA", False, (0, 0, 0)), (250, 120))
+
+            if self.shop:
+                self.screen.blit(imgs.shop, (0, 0))
+                self.screen.blit(self.font.render("U PANA DONGA", False, (255, 255, 255)), (150, 80))
+                self.screen.blit(self.font.render(f"{self.penize}Czk", False, (255, 255, 255)), (300, 250))
+                shop.shop.draw(self.screen, self.font, self.inventar_offset, 4)
+                shop.sipecka(self.screen, imgs, self.poziceinventare, self.inventar_offset)
+
+            if self.show:
+                self.screen.blit(imgs.dialogoveokno, (200, 600))
+                self.screen.blit(self.text, (250, 640))
 
             self.animace()
             pygame.display.flip()

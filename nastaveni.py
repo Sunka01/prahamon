@@ -51,9 +51,13 @@ inventar = img("obrazky/inventar.png", (sirka_okna, vyska_okna))
 mapicka = img("obrazky/mapa/mapicka.png", (sirka_okna, vyska_okna))
 dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
 menu = img("obrazky/menu.png", (350, 400))
+shop = img("obrazky/shop.png", (sirka_okna, vyska_okna))
+
+
 sipka = img("obrazky/sipka.png", (60, 60))
 sipkainv = img("obrazky/sipkainv.png", (60, 60))
 sipkaphd = img("obrazky/sipkaphd.png", (60, 60))
+sipkashop = img("obrazky/sipkashop.png", (60, 60))
 
 # ---- PREDMETY -----
 

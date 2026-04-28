@@ -4,7 +4,7 @@ import prahadex
 
 
 class Npc:
-    def __init__(self, name, image, x, y, dialog="nic"):
+    def __init__(self, name, image, x, y, dialog="None"):
         self.name = name
         self.image = image
         self.x = x
