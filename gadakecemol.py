@@ -1,15 +1,4 @@
-import pygame
-import pytmx
-
-import databaze
-import mapa
-import nabidka
-import eventy
-import inventar
-import npc
-import predmety
-import prahadex
-
+import databaze, mapa, nabidka, eventy, inventar, npc, predmety, pygame, pytmx
 import nastaveni as imgs
 from npc import *
 
@@ -56,6 +45,8 @@ class Hra:
             npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog="...",)]
             # sem muzes davat npcs
 
+        self.hitboxoak = self.npc[0].hitbox
+
         self.prahamon = [
             npc.Prahamon("ptak",15),
             npc.Prahamon("ptak2",20)
@@ -80,12 +71,15 @@ class Hra:
         cil_y = 1620
         cil_x = 1200
         rychlost = 2
-
+        self.npc[0].hitbox = pygame.Rect(cil_x, cil_y, self.npc[0].image.get_width(), self.npc[0].image.get_height())
         if self.npc[0].y < cil_y:
             self.npc[0].y += rychlost
 
         if self.npc[0].x > cil_x and self.npc[0].y == cil_y:
             self.npc[0].x -= rychlost
+        if self.npc[0].x == cil_x and self.npc[0].y == cil_y:
+            self.npc[0].visible = False
+            self.npc[0].hitbox = pygame.Rect(-1, -2, -3, -4)
 
 
 
@@ -103,15 +97,14 @@ class Hra:
 
         if not self.menu and not self.show:
 
-            if keys[pygame.K_w] and (keys[pygame.K_d] or keys[pygame.K_a]):
-                self.y -= self.rychlost
-            elif keys[pygame.K_w]:
+
+            if keys[pygame.K_w]:
                 self.y -= self.rychlost
                 self.postava = imgs.zadek[int(self.animace_chozeni_ted)]
-            if keys[pygame.K_s]:
+            elif keys[pygame.K_s]:
                 self.y += self.rychlost
                 self.postava = imgs.postava[int(self.animace_chozeni_ted)]
-            if keys[pygame.K_a] and not keys[pygame.K_d]:
+            elif keys[pygame.K_a] and not keys[pygame.K_d]:
                 self.x -= self.rychlost
                 self.postava = imgs.leva[int(self.animace_chozeni_ted)]
             elif keys[pygame.K_d] and not keys[pygame.K_a]:
@@ -138,8 +131,7 @@ class Hra:
         self.camera_x = max(0, min(self.camera_x, self.map_width - imgs.sirka_okna))
         self.camera_y = max(0, min(self.camera_y, self.map_height - imgs.vyska_okna))
 
-        # TODO: Okay musime nejak vymyslet system inventare a prahadexu protoze to je takovy dost ze jsem unsure ale
-        # TODO: possibly to nebude tak tezky, nevim do kdy budu spat takze klidne muzes neco zkusit
+
 
     def loop(self):
         while self.running:
@@ -172,6 +164,8 @@ class Hra:
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
             """HITBOXY"""
+            pygame.draw.rect(self.screen, (255, 0, 255), self.npc[0].hitbox, 4)
+
             """MAIN CHARACTER"""
             #pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
             """ZDI"""

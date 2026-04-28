@@ -14,6 +14,7 @@ def handle(hra, event):
 
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_e:
+
             if hra.show:
                 hra.show = False
             elif hra.kolize and hra.kolizenpc:
