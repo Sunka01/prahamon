@@ -27,6 +27,7 @@ class Hra:
         self.prahaball = True
         self.show_inventar = False
         self.show_prahadex = False
+        self.show_mapa = False
         self.inventar_offset = 0
         self.oak_chce_jit = False
         self.predmety = [
@@ -95,7 +96,7 @@ class Hra:
             self.rychlost = 4
             imgs.rychlost_animace_chuze = 0.2
 
-        if not self.menu and not self.show:
+        if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_prahadex and not self.show_inventar:
 
 
             if keys[pygame.K_w]:
@@ -198,6 +199,10 @@ class Hra:
                 self.screen.blit(self.font.render("PRAHADEX", False, (0, 0, 0)), (150, 80))
                 prahadex.prahadex.draw(self.screen,self.font,self.inventar_offset, 4)
                 prahadex.sipecka(self.screen,imgs,self.poziceinventare, self.inventar_offset)
+
+            if self.show_mapa:
+                self.screen.blit(imgs.mapicka, (0, 0))
+                self.screen.blit(self.font.render("PRAHA", False, (0, 0, 0)), (250, 120))
 
             self.animace()
             pygame.display.flip()

@@ -32,7 +32,7 @@ class Prahadex:
 def sipecka(screen, imgs, pozice, offset=0):
     relative_pos = pozice - offset
     y = 100 + (relative_pos - 1) * 120
-    screen.blit(imgs.sipkainv, (730, y))
+    screen.blit(imgs.sipkaphd, (730, y))
 
 
 prahadex = Prahadex()

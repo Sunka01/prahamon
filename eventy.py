@@ -30,7 +30,7 @@ def handle(hra, event):
             hra.oak_chce_jit = True
 
         if hra.menu:
-            if not hra.show_inventar or not hra.show_prahadex:
+            if not hra.show_inventar or not hra.show_prahadex or not hra.show_mapa:
                 if event.key == pygame.K_w:
                     if hra.pozicemenu > 1:
                         hra.pozicemenu -= 1
@@ -44,14 +44,18 @@ def handle(hra, event):
                 pass  # TODO: Mapa
             elif hra.pozicemenu == 3 and event.key == pygame.K_e:
                 hra.show_prahadex = True
+                hra.menu = False
             elif hra.pozicemenu == 2 and event.key == pygame.K_e:
-                pass  # TODO: Mapa
+                hra.show_mapa = True
+                hra.menu = False
             elif hra.pozicemenu == 1 and event.key == pygame.K_e:
                 hra.show_inventar = True
+                hra.menu = False
 
         if hra.show_inventar:
             if event.key == pygame.K_ESCAPE:
                 hra.show_inventar = False
+                hra.menu = True
             if event.key == pygame.K_w:
                 if hra.poziceinventare > 1:
                     hra.poziceinventare -= 1
@@ -66,6 +70,7 @@ def handle(hra, event):
         if hra.show_prahadex:
             if event.key == pygame.K_ESCAPE:
                 hra.show_prahadex = False
+                hra.menu = True
             if event.key == pygame.K_w:
                 if hra.poziceinventare > 1:
                     hra.poziceinventare -= 1
@@ -76,3 +81,8 @@ def handle(hra, event):
                     hra.poziceinventare += 1
                     if hra.poziceinventare > hra.inventar_offset + 4:
                         hra.inventar_offset += 1
+
+        if hra.show_mapa:
+            if event.key == pygame.K_ESCAPE:
+                hra.show_mapa = False
+                hra.menu = True
