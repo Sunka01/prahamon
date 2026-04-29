@@ -21,6 +21,7 @@ class Hra:
         self.font = pygame.font.Font("pokemon_pixel_font.ttf", 64)
         self.animace_chozeni_ted = 0
         self.show = False
+        self.zaplejdialog = False
         self.nejakejplaceholder = False
 
 
@@ -240,7 +241,7 @@ class Hra:
                     self.show = True
                     self.catch = False
 
-            if self.show:
+            if self.show or self.zaplejdialog:
                 self.screen.blit(imgs.dialogoveokno, (200, 600))
                 self.screen.blit(self.text, (250, 640))
 

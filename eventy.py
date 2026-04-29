@@ -14,13 +14,16 @@ def handle(hra, event):
 
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_e:
-            zaplejdialog = hra.show
-            if hra.kolize and hra.kolizenpc and not hra.show:
+            if hra.show or hra.zaplejdialog:
+                hra.zaplejdialog = False
+                hra.show = False
+            elif hra.kolize and hra.kolizenpc and not hra.show:
                 if hra.kolizenpc.dialog != "None":
                     hra.dialog = hra.kolizenpc.dialog
                     hra.show = True
+                    hra.zaplejdialog = True
                 elif hra.kolizenpc.name == "cong":
-                    if not hra.shop:
+                    if not hra.shop and not hra.menu and not hra.show_inventar and not hra.show_prahadex and not hra.show_mapa:
                         hra.shop = True
                         hra.shopopen = True
                 elif hra.kolizenpc.name == "ptak":
@@ -41,14 +44,12 @@ def handle(hra, event):
                     else:
                         hra.dialog = "Nedostatek penez"
                         hra.show = True
-            if zaplejdialog:
-                hra.show = False
             if hra.show:
                 hra.show = False
             for item in hra.predmety:
                 item.sebrano(hra.mchitboxcol, inventar.inventory)
 
-        if not hra.shop:
+        if not hra.shop and not hra.show and not hra.shopopen and not hra.show_prahadex and not hra.show_mapa:
             if event.key == pygame.K_ESCAPE:
                 hra.menu = not hra.menu
 
