@@ -2,6 +2,7 @@ import databaze, mapa, nabidka, eventy, inventar, npc, predmety, pygame, pytmx
 import nastaveni as imgs
 import shop
 from npc import *
+import random
 
 pygame.init()
 pygame.font.init()
@@ -20,6 +21,8 @@ class Hra:
         self.font = pygame.font.Font("pokemon_pixel_font.ttf", 64)
         self.animace_chozeni_ted = 0
         self.show = False
+        self.nejakejplaceholder = False
+
 
         self.kolize = False
         self.kolizenpc = None
@@ -36,9 +39,11 @@ class Hra:
 
         self.oak_chce_jit = False
 
-        self.penize = 101
+        self.penize = 10100
         self.shop = False
         self.shopopen = False
+
+        self.catch = False
 
         self.predmety = [
             predmety.Predmet("prahaball", imgs.prahaball, 1620, 1220),
@@ -52,16 +57,14 @@ class Hra:
         ]
         self.npc = [
             npc.Npc("oak", imgs.oak, 1620, 1420, dialog=databaze.dialog1),
-            npc.Npc("ptak", imgs.ptak, 1420, 1420, dialog=databaze.dialog2),
-            npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog="..."),
+            npc.Npc("ptak", imgs.ptak, 1420, 1420),
+            npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog=databaze.dialog2),
             npc.Npc("cong", imgs.cong, 660, 420)
         ]
             # sem muzes davat npcs
 
 
         self.prahamon = [
-            npc.Prahamon("ptak",15),
-            npc.Prahamon("ptak2",20)
             # prahamoni
         ]
 
@@ -151,6 +154,7 @@ class Hra:
                 eventy.handle(self, event)
             self.hybani()
             self.camera()
+            self.random = random.randint(1, 3)
 
             if hra.oak_chce_jit:
                 hra.npc_movement()
@@ -176,7 +180,7 @@ class Hra:
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
             """HITBOXY"""
-            # for id in self.npc: pygame.draw.rect(self.screen, (255, 0, 255), (id.hitbox.x - self.camera_x,id.hitbox.y - self.camera_y,id.hitbox.width,id.hitbox.height), 4)
+            for id in self.npc: pygame.draw.rect(self.screen, (255, 0, 255), (id.hitbox.x - self.camera_x,id.hitbox.y - self.camera_y,id.hitbox.width,id.hitbox.height), 4)
 
             """MAIN CHARACTER"""
             #pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
@@ -217,6 +221,24 @@ class Hra:
                 self.screen.blit(self.font.render(f"{self.penize}Czk", False, (255, 255, 255)), (300, 250))
                 shop.shop.draw(self.screen, self.font, self.inventar_offset, 4)
                 shop.sipecka(self.screen, imgs, self.poziceinventare, self.inventar_offset)
+
+            if hra.catch and hra.nejakejplaceholder:
+                if inventar.inventory.has("prahaball"):
+                    if self.random == 3:
+                        inventar.inventory.remove("prahaball")
+                        self.prahamon.append(npc.Prahamon("Ptak",15))
+                        prahadex.prahadex.add(self.prahamon[-1])
+                        self.npc[1].visible = False
+                        self.dialog = "Chytl jsi ho! "
+                    else:
+                        inventar.inventory.remove("prahaball")
+                        self.dialog = "Nechytl jsi ho!"
+                    self.show = True
+                    self.catch = False
+                elif not inventar.inventory.has("prahaball"):
+                    self.dialog = "Zadny prahaball!"
+                    self.show = True
+                    self.catch = False
 
             if self.show:
                 self.screen.blit(imgs.dialogoveokno, (200, 600))

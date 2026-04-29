@@ -16,6 +16,8 @@ class Npc:
     def draw(self, screen, camera_x, camera_y):
         if self.visible:
             screen.blit(self.image, (self.x - camera_x, self.y - camera_y))
+        else:
+            self.hitbox = pygame.Rect(-1, -2, -3, -4)
 
     def kolize(self, hrachitbox):
         return hrachitbox.colliderect(self.hitbox)

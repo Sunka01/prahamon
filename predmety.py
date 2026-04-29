@@ -21,3 +21,4 @@ class Predmet:
             inventory.add(self.name)
             return True
         return False
+

@@ -45,7 +45,6 @@ shop = Shop()
 
 nab = [
     ShopList("prahaball", 100)
-
 ]
 
 for p in nab:

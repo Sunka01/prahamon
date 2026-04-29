@@ -23,6 +23,11 @@ def handle(hra, event):
                     if not hra.shop:
                         hra.shop = True
                         hra.shopopen = True
+                elif hra.kolizenpc.name == "ptak":
+                    if not hra.catch and not hra.show:
+                        hra.catch = True
+                        hra.nejakejplaceholder = True
+
             if hra.shop and hra.shopopen:
                 hra.shopopen = False
             elif hra.shop and not hra.show:
@@ -37,6 +42,8 @@ def handle(hra, event):
                         hra.dialog = "Nedostatek penez"
                         hra.show = True
             if zaplejdialog:
+                hra.show = False
+            if hra.show:
                 hra.show = False
             for item in hra.predmety:
                 item.sebrano(hra.mchitboxcol, inventar.inventory)
