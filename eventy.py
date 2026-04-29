@@ -79,6 +79,11 @@ def handle(hra, event):
             elif hra.pozicemenu == 1 and event.key == pygame.K_e:
                 hra.show_inventar = True
                 hra.menu = False
+            elif event.key == pygame.K_p:
+                if hra.battle:
+                    hra.battle = False
+                else:
+                    hra.battle = True
 
         if hra.show_inventar:
             if event.key == pygame.K_ESCAPE:

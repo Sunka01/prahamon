@@ -12,6 +12,7 @@ pygame.display.set_caption("Prahamon")
 class Hra:
 
     def __init__(self, x=310, y=360, rychlost=4, pozicemenu=1, poziceinventare=1):
+        self.prahamoni = None
         self.rychlost = rychlost
         self.x = x
         self.y = y
@@ -45,6 +46,9 @@ class Hra:
         self.shopopen = False
 
         self.catch = False
+        self.battle = False
+
+
 
         self.predmety = [
             predmety.Predmet("prahaball", imgs.prahaball, 1620, 1220),
@@ -156,6 +160,7 @@ class Hra:
             self.hybani()
             self.camera()
             self.random = random.randint(1, 3)
+            self.randomtrava = random.randint(1, 500)
 
             if hra.oak_chce_jit:
                 hra.npc_movement()
@@ -164,8 +169,10 @@ class Hra:
                                         self.postava_height - 8)
             self.mchitboxcol = pygame.Rect(self.x + 10, self.y + 16, self.postava_width - 20, self.postava_height - 16)
 
+            self.trava = pygame.Rect(1060 - self.camera_x, 0 - self.camera_y, 820, 400)
 
             mapa.vykresli_zem(self.screen, self.map, self.camera_x, self.camera_y)
+
 
             self.text = self.font.render(self.dialog, False, (0, 0, 0))
 
@@ -195,6 +202,10 @@ class Hra:
                     self.kolize = True
                     self.kolizenpc = item
                     break
+
+            if self.randomtrava == 20 and self.mchitbox.colliderect(self.trava):
+                self.dialog = "ted bys nasel pokemona"
+                self.show = True
 
             if self.menu:
                 nabidka.draw(self.screen, imgs, self.font)
@@ -240,6 +251,19 @@ class Hra:
                     self.dialog = "Zadny prahaball!"
                     self.show = True
                     self.catch = False
+
+            if hra.battle:
+                self.screen.fill((0, 40, 0))
+                self.screen.blit(imgs.dialogoveokno, (30, 600))
+                x, y = 830, 110
+
+
+
+                self.screen.blit(imgs.battlemenu, (800, 502))
+                self.screen.blit(imgs.ptak , (200, 500))
+
+            pygame.draw.rect(self.screen, (0, 0, 0), (1060 - self.camera_x, 0 - self.camera_y, 820, 400), 2)
+
 
             if self.show or self.zaplejdialog:
                 self.screen.blit(imgs.dialogoveokno, (200, 600))

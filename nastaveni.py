@@ -1,4 +1,6 @@
 import pygame
+import prahadex
+import npc
 
 sirka_okna = 1280
 vyska_okna = 800
@@ -51,6 +53,7 @@ inventar = img("obrazky/inventar.png", (sirka_okna, vyska_okna))
 mapicka = img("obrazky/mapa/mapicka.png", (sirka_okna, vyska_okna))
 dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
 menu = img("obrazky/menu.png", (350, 400))
+battlemenu = img("obrazky/menu.png", (450, 250))
 shop = img("obrazky/shop.png", (sirka_okna, vyska_okna))
 
 
@@ -66,3 +69,5 @@ pivko = img("obrazky/prahabally/pivko.png", (24, 45))
 
 
 # sem proste davej ty obrazky ono by se to pak moc stradalo, az toho bude vic rozdelime to do vic categories
+
+
