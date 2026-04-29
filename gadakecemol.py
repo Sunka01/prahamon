@@ -20,6 +20,7 @@ class Hra:
         self.running = True
         self.dialog = "None"
         self.font = pygame.font.Font("pokemon_pixel_font.ttf", 64)
+        self.bigfont = pygame.font.Font("pokemon_pixel_font.ttf", 82)
         self.animace_chozeni_ted = 0
         self.show = False
         self.zaplejdialog = False
@@ -70,6 +71,7 @@ class Hra:
 
 
         self.prahamon = [
+            npc.Prahamon("Ohnivak", 15)
             # prahamoni
         ]
 
@@ -213,13 +215,15 @@ class Hra:
 
             if self.show_inventar:
                 self.screen.blit(imgs.inventar, (0, 0))
-                self.screen.blit(self.font.render("INVENTAR", False, (0, 0, 0)), (150, 80))
+                self.screen.blit(self.bigfont.render("INVENTAR", False, (50, 50, 50)), (125, 95))
+                self.screen.blit(self.bigfont.render("INVENTAR", False, (255, 255, 255)), (120, 90))
                 inventar.inventory.draw(self.screen, self.font, self.inventar_offset, 4)
                 inventar.sipecka(self.screen, imgs, self.poziceinventare, self.inventar_offset)
 
             if self.show_prahadex:
                 self.screen.blit(imgs.prahadex, (0, 0))
-                self.screen.blit(self.font.render("PRAHADEX", False, (0, 0, 0)), (150, 80))
+                self.screen.blit(self.bigfont.render("PRAHADEX", False, (50, 50, 50)), (125, 95))
+                self.screen.blit(self.bigfont.render("PRAHADEX", False, (255, 255, 255)), (120, 90))
                 prahadex.prahadex.draw(self.screen,self.font,self.inventar_offset, 4)
                 prahadex.sipecka(self.screen,imgs,self.poziceinventare, self.inventar_offset)
 
@@ -229,7 +233,9 @@ class Hra:
 
             if self.shop:
                 self.screen.blit(imgs.shop, (0, 0))
-                self.screen.blit(self.font.render("U PANA DONGA", False, (255, 255, 255)), (150, 80))
+                self.screen.blit(self.bigfont.render("U PANA DONGA", False, (50, 50, 50)), (125, 95))
+                self.screen.blit(self.bigfont.render("U PANA DONGA", False, (255, 255, 255)), (120, 90))
+                self.screen.blit(self.font.render(f"{self.penize}Czk", False, (50, 50, 50)), (303, 253))
                 self.screen.blit(self.font.render(f"{self.penize}Czk", False, (255, 255, 255)), (300, 250))
                 shop.shop.draw(self.screen, self.font, self.inventar_offset, 4)
                 shop.sipecka(self.screen, imgs, self.poziceinventare, self.inventar_offset)
@@ -256,13 +262,13 @@ class Hra:
                 self.screen.fill((0, 40, 0))
                 self.screen.blit(imgs.dialogoveokno, (30, 600))
                 x, y = 830, 110
-
-
-
                 self.screen.blit(imgs.battlemenu, (800, 502))
-                self.screen.blit(imgs.ptak , (200, 500))
+                prahamon = list(prahadex.prahadex.prahamoni.values())[0]
+                obrazek = imgs.prahamon_obrazky.get(prahamon.name)
+                if obrazek:
+                    self.screen.blit(obrazek, (200, 500))
 
-            pygame.draw.rect(self.screen, (0, 0, 0), (1060 - self.camera_x, 0 - self.camera_y, 820, 400), 2)
+            # pygame.draw.rect(self.screen, (0, 0, 0), (1060 - self.camera_x, 0 - self.camera_y, 820, 400), 2)
 
 
             if self.show or self.zaplejdialog:
