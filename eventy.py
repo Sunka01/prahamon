@@ -69,7 +69,7 @@ def handle(hra, event):
                 pygame.quit()
                 sys.exit()
             elif hra.pozicemenu == 4 and event.key == pygame.K_e:
-                pass  # TODO: Mapa
+                pass  # TODO: hrac
             elif hra.pozicemenu == 3 and event.key == pygame.K_e:
                 hra.show_prahadex = True
                 hra.menu = False
