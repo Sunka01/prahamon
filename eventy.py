@@ -116,7 +116,15 @@ def handle(hra, event):
                     hra.poziceinventare += 1
                     if hra.poziceinventare > hra.inventar_offset + 4:
                         hra.inventar_offset += 1
-
+            if event.key == pygame.K_e:
+                prahamoni = list(prahadex.prahadex.prahamoni.values())
+                if prahamoni and hra.poziceinventare <= len(prahamoni):
+                    vybran = prahamoni[hra.poziceinventare - 1]
+                    del prahadex.prahadex.prahamoni[vybran.name]
+                    prvni = {vybran.name: vybran}
+                    for stary, novy in prahadex.prahadex.prahamoni.items():
+                        prvni[stary] = novy
+                    prahadex.prahadex.prahamoni = prvni
         if hra.show_mapa:
             if event.key == pygame.K_ESCAPE:
                 hra.show_mapa = False

@@ -71,8 +71,17 @@ class Hra:
 
 
         self.prahamon = [
-            npc.Prahamon("Ohnivak", 15)
+            npc.Prahamon("Ptak", 15, 15, 1),
+            npc.Prahamon("Twitter", 15, 15, 2),
+            npc.Prahamon("Twilight", 20, 20, 3),
             # prahamoni
+        ]
+
+        self.protivnici = [
+            npc.Prahamon("Ptak", 10, 15, 1),
+            npc.Prahamon("Twitter", 15, 15, 2),
+            npc.Prahamon("Twilight", 20, 20, 3),
+
         ]
 
         for p in self.prahamon:
@@ -259,18 +268,35 @@ class Hra:
                     self.catch = False
 
             if hra.battle:
-                prahamon = list(prahadex.prahadex.prahamoni.values())[0]
+
                 self.screen.fill((0, 40, 0))
-                self.screen.blit(imgs.battleground, (0,0))
-                self.screen.blit(imgs.battlemenu, (0,0))
-                self.screen.blit(self.font.render(prahamon.name, False, (150, 150, 150)), (922, 372))
-                self.screen.blit(self.font.render(prahamon.name, False, (0, 0, 0)), (920, 370))
-                self.screen.blit(self.font.render(f"HP: {prahamon.hp}", False, (150, 150, 150)), (922, 422))
-                self.screen.blit(self.font.render(f"HP: {prahamon.hp}", False, (0, 0, 0)), (920, 420))
+                self.screen.blit(imgs.battleground, (0, 0))
+
+                prahamon = list(prahadex.prahadex.prahamoni.values())[0]
+                protivnik = self.protivnici[0]
 
                 obrazek = imgs.prahamon_obrazky.get(prahamon.name)
                 if obrazek:
-                    self.screen.blit(obrazek, (200, 500))
+                    self.screen.blit(obrazek, (100, 220))
+
+                imgprotivnika = imgs.prahamon_obrazky.get("Ptak;")
+                if imgprotivnika:
+                    self.screen.blit(imgprotivnika, (622, 33))
+
+
+                self.screen.blit(imgs.battlemenu, (0,0))
+                self.screen.blit(self.font.render(f"{prahamon.name} lvl. {prahamon.lvl}", False, (150, 150, 150)),
+                                 (922, 372))
+                self.screen.blit(self.font.render(f"{prahamon.name} lvl. {prahamon.lvl}", False, (0, 0, 0)), (920, 370))
+                self.screen.blit(self.font.render(f"HP: {prahamon.hp}/{prahamon.maxhp}", False, (150, 150, 150)),
+                                 (922, 422))
+                self.screen.blit(self.font.render(f"HP: {prahamon.hp}/{prahamon.maxhp}", False, (0, 0, 0)), (920, 420))
+                self.screen.blit(self.font.render(f"{protivnik.name} lvl. {protivnik.lvl}", False, (150, 150, 150)),
+                                 (68, 74))
+                self.screen.blit(self.font.render(f"{protivnik.name} lvl. {protivnik.lvl}", False, (0, 0, 0)), (66, 72))
+                self.screen.blit(self.font.render(f"HP: {protivnik.hp}/{protivnik.maxhp}", False, (150, 150, 150)),
+                                 (68, 124))
+                self.screen.blit(self.font.render(f"HP: {protivnik.hp}/{protivnik.maxhp}", False, (0, 0, 0)), (66, 122))
 
             # pygame.draw.rect(self.screen, (0, 0, 0), (1060 - self.camera_x, 0 - self.camera_y, 820, 400), 2)
 

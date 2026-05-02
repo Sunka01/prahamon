@@ -17,7 +17,7 @@ def img(path, size=None):
 velikost_postavy = (96, 96)
 
 oak = img("obrazky/oak.png", (51,64))
-ptak = img("obrazky/ptak.png", (51, 64))
+
 ohnivak = img("obrazky/oak.png", (51, 64))
 cong = img("obrazky/cong.png", (51, 66))
 babisek = img("obrazky/babisek.png", (92, 70))
@@ -72,7 +72,17 @@ pivko = img("obrazky/prahabally/pivko.png", (24, 45))
 
 # sem proste davej ty obrazky ono by se to pak moc stradalo, az toho bude vic rozdelime to do vic categories
 
+# ---- PRAHAMONI -----
+
+ptakzepredu = img("obrazky/prahamoni/ptakpredek.png", (440, 380))
+ptak = img("obrazky/prahamoni/ptak.png", (480, 480))
+twitter = img("obrazky/prahamoni/twitter.png", (480, 480))
+twilight = img("obrazky/prahamoni/twilight.png", (480, 480))
+
 prahamon_obrazky = {
+    "Ptak;": ptakzepredu,
     "Ptak": ptak,
+    "Twitter": twitter,
+    "Twilight": twilight,
     "Ohnivak": ohnivak,
 }

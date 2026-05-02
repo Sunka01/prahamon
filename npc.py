@@ -24,8 +24,8 @@ class Npc:
 
 
 class Prahamon:
-    def __init__(self, name, hp):
+    def __init__(self, name, hp, maxhp, lvl):
         self.name = name
         self.hp = hp
-
-
+        self.maxhp = maxhp
+        self.lvl = lvl
