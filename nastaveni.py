@@ -54,7 +54,8 @@ inventar = img("obrazky/inventar.png", (sirka_okna, vyska_okna))
 mapicka = img("obrazky/mapa/mapicka.png", (sirka_okna, vyska_okna))
 dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
 menu = img("obrazky/menu.png", (350, 400))
-battlemenu = img("obrazky/menu.png", (450, 250))
+battlemenu = img("obrazky/battlemenu.png", (sirka_okna, vyska_okna))
+battleground= img("obrazky/battleground.png", (sirka_okna, vyska_okna))
 shop = img("obrazky/shop.png", (sirka_okna, vyska_okna))
 
 

@@ -259,11 +259,15 @@ class Hra:
                     self.catch = False
 
             if hra.battle:
-                self.screen.fill((0, 40, 0))
-                self.screen.blit(imgs.dialogoveokno, (30, 600))
-                x, y = 830, 110
-                self.screen.blit(imgs.battlemenu, (800, 502))
                 prahamon = list(prahadex.prahadex.prahamoni.values())[0]
+                self.screen.fill((0, 40, 0))
+                self.screen.blit(imgs.battleground, (0,0))
+                self.screen.blit(imgs.battlemenu, (0,0))
+                self.screen.blit(self.font.render(prahamon.name, False, (150, 150, 150)), (922, 372))
+                self.screen.blit(self.font.render(prahamon.name, False, (0, 0, 0)), (920, 370))
+                self.screen.blit(self.font.render(f"HP: {prahamon.hp}", False, (150, 150, 150)), (922, 422))
+                self.screen.blit(self.font.render(f"HP: {prahamon.hp}", False, (0, 0, 0)), (920, 420))
+
                 obrazek = imgs.prahamon_obrazky.get(prahamon.name)
                 if obrazek:
                     self.screen.blit(obrazek, (200, 500))
