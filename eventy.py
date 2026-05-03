@@ -125,10 +125,25 @@ def handle(hra, event):
                     for stary, novy in prahadex.prahadex.prahamoni.items():
                         prvni[stary] = novy
                     prahadex.prahadex.prahamoni = prvni
+
         if hra.show_mapa:
             if event.key == pygame.K_ESCAPE:
                 hra.show_mapa = False
                 hra.menu = True
+
+        if hra.battle:
+            if event.key == pygame.K_a:
+                if hra.pozice > 1:
+                    hra.pozice -= 1
+                elif hra.pozice == 1:
+                    hra.pozice = 4
+
+            if event.key == pygame.K_d:
+                if hra.pozice < 4:
+                    hra.pozice += 1
+                elif hra.pozice == 4:
+                    hra.pozice = 1
+
 
         if event.key == pygame.K_ESCAPE:
             if hra.shop:

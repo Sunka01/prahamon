@@ -63,6 +63,7 @@ sipka = img("obrazky/sipka.png", (60, 60))
 sipkainv = img("obrazky/sipkainv.png", (60, 60))
 sipkaphd = img("obrazky/sipkaphd.png", (60, 60))
 sipkashop = img("obrazky/sipkashop.png", (60, 60))
+sipkabattle = img("obrazky/sipka.png", (30, 30))
 
 # ---- PREDMETY -----
 
