@@ -24,7 +24,7 @@ class Prahadex:
         items = list(self.prahamoni.values())
         visible = items[offset:offset + limit]
         for p in visible:
-            text = font.render(f"{p.name} : {p.hp}hp", True, (0, 0, 0))
+            text = font.render(f"{p.name} : {p.hp}/{p.maxhp}hp", True, (0, 0, 0))
             screen.blit(text, (x, y))
             y += 120
 

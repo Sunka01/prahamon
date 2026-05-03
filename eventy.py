@@ -7,6 +7,7 @@ import inventar
 import prahadex
 import npc
 import shop
+import nastaveni as imgs
 
 
 def handle(hra, event):
@@ -16,18 +17,36 @@ def handle(hra, event):
 
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_e:
-            if hra.show or hra.zaplejdialog:
+            if hra.med:
+                if hra.medp == 1:
+                    for p in prahadex.prahadex.prahamoni.values():
+                        p.hp = p.maxhp
+                    hra.med = False
+                    hra.show = False
+                    hra.zaplejdialog = False
+                if hra.medp == 2:
+                    hra.med = False
+                    hra.show = False
+                    hra.zaplejdialog = False
+            elif hra.show or hra.zaplejdialog and not hra.med:
                 hra.zaplejdialog = False
                 hra.show = False
-            elif hra.kolize and hra.kolizenpc and not hra.show:
-                if hra.kolizenpc.dialog != "None":
+            elif hra.kolize and hra.kolizenpc and not hra.show and not hra.shop and not hra.menu and not hra.show_inventar and not hra.show_prahadex and not hra.show_mapa:
+                if hra.kolizenpc.name == "doctor":
                     hra.dialog = hra.kolizenpc.dialog
                     hra.show = True
                     hra.zaplejdialog = True
+                    hra.med = True
                 elif hra.kolizenpc.name == "cong":
                     if not hra.shop and not hra.menu and not hra.show_inventar and not hra.show_prahadex and not hra.show_mapa:
                         hra.shop = True
                         hra.shopopen = True
+                elif hra.kolizenpc.dialog != "None":
+                    hra.dialog = hra.kolizenpc.dialog
+                    hra.show = True
+                    hra.zaplejdialog = True
+
+
 
             if hra.shop and hra.shopopen:
                 hra.shopopen = False
@@ -42,8 +61,6 @@ def handle(hra, event):
                     else:
                         hra.dialog = "Nedostatek penez"
                         hra.show = True
-            if hra.show:
-                hra.show = False
             for item in hra.predmety:
                 item.sebrano(hra.mchitboxcol, inventar.inventory)
 
@@ -152,6 +169,14 @@ def handle(hra, event):
                         hra.show_inventar = True
                     elif hra.pozice == 4:
                         hra.battle = False
+
+        if hra.med:
+            if event.key == pygame.K_s or event.key == pygame.K_w:
+                if hra.medp == 1:
+                    hra.medp = 2
+                elif hra.medp == 2:
+                    hra.medp = 1
+
 
 
         if event.key == pygame.K_ESCAPE:

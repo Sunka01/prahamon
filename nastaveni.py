@@ -57,6 +57,7 @@ menu = img("obrazky/menu.png", (350, 400))
 battlemenu = img("obrazky/battlemenu.png", (sirka_okna, vyska_okna))
 battleground= img("obrazky/battleground.png", (sirka_okna, vyska_okna))
 shop = img("obrazky/shop.png", (sirka_okna, vyska_okna))
+heal = img("obrazky/heal.png", (sirka_okna, vyska_okna))
 
 
 sipka = img("obrazky/sipka.png", (60, 60))

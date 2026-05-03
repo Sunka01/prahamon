@@ -49,7 +49,8 @@ class Hra:
 
         self.catch = False
         self.battle = False
-
+        self.med = False
+        self.medp = 1
 
 
         self.predmety = [
@@ -72,7 +73,7 @@ class Hra:
 
 
         self.prahamon = [
-            npc.Prahamon("Ptak", 15, 15, 1),
+            npc.Prahamon("Ptak", 10, 15, 1),
             npc.Prahamon("Twitter", 15, 15, 2),
             npc.Prahamon("Twilight", 20, 20, 3),
             # prahamoni
@@ -127,7 +128,7 @@ class Hra:
             self.rychlost = 4
             imgs.rychlost_animace_chuze = 0.2
 
-        if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_prahadex and not self.show_inventar and not self.shop and not self.battle:
+        if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_prahadex and not self.show_inventar and not self.shop and not self.battle and not self.med:
 
 
             if keys[pygame.K_w]:
@@ -280,6 +281,17 @@ class Hra:
                 self.screen.blit(imgs.dialogoveokno, (0,0))
                 self.screen.blit(self.textshadow, (183, 643))
                 self.screen.blit(self.text, (180,640))
+                if self.med:
+                    self.screen.blit(imgs.heal, (0,0))
+                    self.screen.blit(self.font.render("Ano", False, (150, 150, 150)), (1123, 613))
+                    self.screen.blit(self.font.render("Ano", False, (0, 0, 0)), (1120, 610))
+                    self.screen.blit(self.font.render("Ne", False, (150, 150, 150)), (1123, 668))
+                    self.screen.blit(self.font.render("Ne", False, (0, 0, 0)), (1120, 665))
+                    if self.medp == 1:
+                        self.screen.blit(imgs.sipkaphd, (1060,610))
+                    elif self.medp == 2:
+                        self.screen.blit(imgs.sipkaphd, (1060,665))
+
 
             self.animace()
             pygame.display.flip()
