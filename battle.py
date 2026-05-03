@@ -2,7 +2,7 @@ import prahadex
 import nastaveni as imgs
 
 
-# aaa
+
 
 def draw(screen, font, hra):
     prahamon = list(prahadex.prahadex.prahamoni.values())[0]
