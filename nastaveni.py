@@ -18,8 +18,8 @@ velikost_postavy = (96, 96)
 
 oak = img("obrazky/oak.png", (51,64))
 
-ohnivak = img("obrazky/oak.png", (51, 64))
-cong = img("obrazky/cong.png", (51, 66))
+doctor = img("obrazky/doctor.png", velikost_postavy)
+cong = img("obrazky/cong.png", velikost_postavy)
 babisek = img("obrazky/babisek.png", (92, 70))
 
 
@@ -52,7 +52,7 @@ mapa = img("obrazky/mapa/img.png", velikost_postavy)
 prahadex = img("obrazky/prahadex.png", (sirka_okna, vyska_okna))
 inventar = img("obrazky/inventar.png", (sirka_okna, vyska_okna))
 mapicka = img("obrazky/mapa/mapicka.png", (sirka_okna, vyska_okna))
-dialogoveokno = img("obrazky/dialogoveokno.png", (880,150))
+dialogoveokno = img("obrazky/dialogoveokno.png", (sirka_okna, vyska_okna))
 menu = img("obrazky/menu.png", (350, 400))
 battlemenu = img("obrazky/battlemenu.png", (sirka_okna, vyska_okna))
 battleground= img("obrazky/battleground.png", (sirka_okna, vyska_okna))
@@ -85,5 +85,4 @@ prahamon_obrazky = {
     "Ptak": ptak,
     "Twitter": twitter,
     "Twilight": twilight,
-    "Ohnivak": ohnivak,
 }

@@ -65,7 +65,8 @@ class Hra:
         self.npc = [
             npc.Npc("oak", imgs.oak, 1620, 1420, dialog=databaze.dialog1),
             npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog=databaze.dialog2),
-            npc.Npc("cong", imgs.cong, 660, 420)
+            npc.Npc("cong", imgs.cong, 660, 420),
+            npc.Npc("doctor", imgs.doctor, 1060, 1420, dialog="Chces vylecit sve Prahamony?")
         ]
             # sem muzes davat npcs
 
@@ -186,6 +187,7 @@ class Hra:
 
 
             self.text = self.font.render(self.dialog, False, (0, 0, 0))
+            self.textshadow = self.font.render(self.dialog, False, (150, 150, 150))
 
             self.kolize = False
             self.kolizenpc = None
@@ -275,8 +277,9 @@ class Hra:
 
 
             if self.show or self.zaplejdialog:
-                self.screen.blit(imgs.dialogoveokno, (200, 600))
-                self.screen.blit(self.text, (250, 640))
+                self.screen.blit(imgs.dialogoveokno, (0,0))
+                self.screen.blit(self.textshadow, (183, 643))
+                self.screen.blit(self.text, (180,640))
 
             self.animace()
             pygame.display.flip()
