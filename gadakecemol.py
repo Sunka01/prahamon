@@ -64,7 +64,6 @@ class Hra:
         ]
         self.npc = [
             npc.Npc("oak", imgs.oak, 1620, 1420, dialog=databaze.dialog1),
-            npc.Npc("ptak", imgs.ptak, 1420, 1420),
             npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog=databaze.dialog2),
             npc.Npc("cong", imgs.cong, 660, 420)
         ]
@@ -216,8 +215,7 @@ class Hra:
                     break
 
             if self.randomtrava == 20 and self.mchitbox.colliderect(self.trava):
-                self.dialog = "ted bys nasel pokemona"
-                self.show = True
+                self.battle = True
 
             if self.menu:
                 nabidka.draw(self.screen, imgs, self.font)

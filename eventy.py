@@ -26,10 +26,6 @@ def handle(hra, event):
                     if not hra.shop and not hra.menu and not hra.show_inventar and not hra.show_prahadex and not hra.show_mapa:
                         hra.shop = True
                         hra.shopopen = True
-                elif hra.kolizenpc.name == "ptak":
-                    if not hra.catch and not hra.show:
-                        hra.catch = True
-                        hra.nejakejplaceholder = True
 
             if hra.shop and hra.shopopen:
                 hra.shopopen = False
@@ -143,6 +139,10 @@ def handle(hra, event):
                     hra.pozice += 1
                 elif hra.pozice == 4:
                     hra.pozice = 1
+
+            if event.key == pygame.K_e:
+                if hra.pozice == 4:
+                    hra.battle = False
 
 
         if event.key == pygame.K_ESCAPE:
