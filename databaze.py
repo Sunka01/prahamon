@@ -1,5 +1,6 @@
 dialog1 = "Miluju parno"
 dialog2 = "Miluju drogy"
+dialog3 = "Miluju parna"
 
 
 
