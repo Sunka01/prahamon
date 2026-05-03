@@ -126,7 +126,7 @@ class Hra:
             self.rychlost = 4
             imgs.rychlost_animace_chuze = 0.2
 
-        if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_prahadex and not self.show_inventar and not self.shop:
+        if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_prahadex and not self.show_inventar and not self.shop and not self.battle:
 
 
             if keys[pygame.K_w]:
@@ -214,7 +214,11 @@ class Hra:
                     self.kolizenpc = item
                     break
 
-            if self.randomtrava == 20 and self.mchitbox.colliderect(self.trava):
+            if hra.battle:
+                battle.draw(self.screen, self.font, self)
+                battle.sipecka(self.screen, imgs, self.pozice)
+
+            if self.randomtrava == 20 and self.mchitbox.colliderect(self.trava) and not hra.battle and not hra.menu:
                 self.battle = True
 
             if self.menu:
@@ -266,9 +270,7 @@ class Hra:
                     self.show = True
                     self.catch = False
 
-            if hra.battle:
-                battle.draw(self.screen, self.font, self)
-                battle.sipecka(self.screen, imgs, self.pozice)
+
             # pygame.draw.rect(self.screen, (0, 0, 0), (1060 - self.camera_x, 0 - self.camera_y, 820, 400), 2)
 
 

@@ -1,5 +1,7 @@
 import pygame
 import sys
+
+import battle
 import databaze
 import inventar
 import prahadex
@@ -45,7 +47,7 @@ def handle(hra, event):
             for item in hra.predmety:
                 item.sebrano(hra.mchitboxcol, inventar.inventory)
 
-        if not hra.shop and not hra.show and not hra.shopopen and not hra.show_prahadex and not hra.show_mapa:
+        if not hra.shop and not hra.show and not hra.shopopen and not hra.show_prahadex and not hra.show_mapa and not hra.battle:
             if event.key == pygame.K_ESCAPE:
                 hra.menu = not hra.menu
 
@@ -84,7 +86,8 @@ def handle(hra, event):
         if hra.show_inventar:
             if event.key == pygame.K_ESCAPE:
                 hra.show_inventar = False
-                hra.menu = True
+                if not hra.battle:
+                    hra.menu = True
                 hra.poziceinventare = 1
             if event.key == pygame.K_w:
                 if hra.poziceinventare > 1:
@@ -100,7 +103,8 @@ def handle(hra, event):
         if hra.show_prahadex:
             if event.key == pygame.K_ESCAPE:
                 hra.show_prahadex = False
-                hra.menu = True
+                if not hra.battle:
+                    hra.menu = True
                 hra.poziceinventare = 1
             if event.key == pygame.K_w:
                 if hra.poziceinventare > 1:
@@ -128,21 +132,26 @@ def handle(hra, event):
                 hra.menu = True
 
         if hra.battle:
-            if event.key == pygame.K_a:
-                if hra.pozice > 1:
-                    hra.pozice -= 1
-                elif hra.pozice == 1:
-                    hra.pozice = 4
+            if not hra.show_inventar:
+                if event.key == pygame.K_a:
+                    if hra.pozice > 1:
+                        hra.pozice -= 1
+                    elif hra.pozice == 1:
+                        hra.pozice = 4
 
-            if event.key == pygame.K_d:
-                if hra.pozice < 4:
-                    hra.pozice += 1
-                elif hra.pozice == 4:
-                    hra.pozice = 1
+                if event.key == pygame.K_d:
+                    if hra.pozice < 4:
+                        hra.pozice += 1
+                    elif hra.pozice == 4:
+                        hra.pozice = 1
 
-            if event.key == pygame.K_e:
-                if hra.pozice == 4:
-                    hra.battle = False
+                if event.key == pygame.K_e:
+                    if hra.pozice == 1:
+                        hra.protivnici[0].hp -= 1
+                    elif hra.pozice == 3:
+                        hra.show_inventar = True
+                    elif hra.pozice == 4:
+                        hra.battle = False
 
 
         if event.key == pygame.K_ESCAPE:
