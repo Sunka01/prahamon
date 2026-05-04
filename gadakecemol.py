@@ -222,6 +222,7 @@ class Hra:
                 battle.sipecka(self.screen, imgs, self.pozice)
 
             if self.randomtrava == 20 and self.mchitbox.colliderect(self.trava) and not hra.battle and not hra.menu:
+                hra.protivnici[0].hp = hra.protivnici[0].maxhp
                 self.battle = True
 
             if self.menu:

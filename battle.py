@@ -8,8 +8,6 @@ def draw(screen, font, hra):
     prahamon = list(prahadex.prahadex.prahamoni.values())[0]
     protivnik = hra.protivnici[0]
 
-    hra.protivnici[0].hp = hra.protivnici[0].maxhp
-
     screen.fill((0, 40, 0))
     screen.blit(imgs.battleground, (0, 0))
 
