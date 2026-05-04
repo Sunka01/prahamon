@@ -237,9 +237,10 @@ class Hra:
 
             if self.show_prahadex:
                 self.screen.blit(imgs.prahadex, (0, 0))
+                self.screen.blit(imgs.prahadexdesc, (0, 0))
                 self.screen.blit(self.bigfont.render("PRAHADEX", False, (50, 50, 50)), (125, 95))
                 self.screen.blit(self.bigfont.render("PRAHADEX", False, (255, 255, 255)), (120, 90))
-                prahadex.prahadex.draw(self.screen,self.font,self.inventar_offset, 4)
+                prahadex.prahadex.draw(self.screen, self.font, self.inventar_offset, 4, self.poziceinventare, imgs)
                 prahadex.sipecka(self.screen,imgs,self.poziceinventare, self.inventar_offset)
 
             if self.show_mapa:

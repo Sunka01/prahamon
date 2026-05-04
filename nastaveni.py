@@ -50,6 +50,7 @@ prava.append(img("obrazky/prava_4.png", velikost_postavy))
 
 mapa = img("obrazky/mapa/img.png", velikost_postavy)
 prahadex = img("obrazky/prahadex.png", (sirka_okna, vyska_okna))
+prahadexdesc = img("obrazky/prahadexshow.png", (sirka_okna, vyska_okna))
 inventar = img("obrazky/inventar.png", (sirka_okna, vyska_okna))
 mapicka = img("obrazky/mapa/mapicka.png", (sirka_okna, vyska_okna))
 dialogoveokno = img("obrazky/dialogoveokno.png", (sirka_okna, vyska_okna))
