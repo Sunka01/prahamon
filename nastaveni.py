@@ -88,3 +88,10 @@ prahamon_obrazky = {
     "Twitter": twitter,
     "Twilight": twilight,
 }
+
+inventar_obrazky = {
+    "Prahaball": prahaball,
+    "Pivko": pivko,
+
+
+}

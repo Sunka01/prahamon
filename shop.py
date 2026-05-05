@@ -1,5 +1,6 @@
 import pygame
 import npc
+import nastaveni as imgs
 
 
 class Shop:
@@ -25,14 +26,18 @@ class Shop:
         visible = items[offset:offset + limit]
         for p in visible:
             text = font.render(f"{p.name} : {p.cena}Czk", True, (0, 0, 0))
+            texta = font.render(f"{p.name} : {p.cena}Czk", True, (150, 150, 150))
+            screen.blit(imgs.inventar_obrazky.get(p.name), (x-80, y))
+            screen.blit(texta, (x+3, y+3))
             screen.blit(text, (x, y))
+
             y += 120
 
 
 def sipecka(screen, imgs, pozice, offset=0):
     relative_pos = pozice - offset
     y = 100 + (relative_pos - 1) * 120
-    screen.blit(imgs.sipkashop, (730, y))
+    screen.blit(imgs.sipkashop, (670, y))
 
 
 class ShopList:
@@ -44,7 +49,7 @@ class ShopList:
 shop = Shop()
 
 nab = [
-    ShopList("prahaball", 100)
+    ShopList("Prahaball", 100)
 ]
 
 for p in nab:

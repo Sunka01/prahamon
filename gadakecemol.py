@@ -56,13 +56,13 @@ class Hra:
 
 
         self.predmety = [
-            predmety.Predmet("prahaball", imgs.prahaball, 1620, 1220),
-            predmety.Predmet("pivko", imgs.pivko, 1520, 1220),
-            predmety.Predmet("pivko2", imgs.pivko, 1520, 1120),
-            predmety.Predmet("pivko3", imgs.pivko, 1520, 1020),
-            predmety.Predmet("pivko4", imgs.pivko, 1520, 920),
-            predmety.Predmet("pivko5", imgs.pivko, 1520, 820),
-            predmety.Predmet("pivko6", imgs.pivko, 1520, 720),
+            predmety.Predmet("Prahaball", imgs.prahaball, 1620, 1220),
+            predmety.Predmet("Pivko", imgs.pivko, 1520, 1220),
+            predmety.Predmet("Pivko", imgs.pivko, 1520, 1120),
+            predmety.Predmet("Pivko", imgs.pivko, 1520, 1020),
+            predmety.Predmet("Pivko", imgs.pivko, 1520, 920),
+            predmety.Predmet("Pivko", imgs.pivko, 1520, 820),
+            predmety.Predmet("Pivko", imgs.pivko, 1520, 720),
             # sem muzes davat predmety
         ]
         self.npc = [
@@ -211,7 +211,7 @@ class Hra:
             """ZDI"""
             for zed in self.zdi:
                 pass
-                #pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
+                pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
 
             for item in self.npc:
                 if item.kolize(self.mchitboxcol):
