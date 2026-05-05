@@ -43,6 +43,8 @@ class Prahadex:
             screen.blit(font.render(f"Abilitky", True, (255, 255, 255)), (x, y))
             screen.blit(font.render(f"Switch", True, (50, 50, 50)), (x + 4, y + 124))
             screen.blit(font.render(f"Switch", True, (255, 255, 255)), (x, y + 120))
+            screen.blit(font.render(f"Inventar", True, (50, 50, 50)), (x + 4, y + 244))  # add this
+            screen.blit(font.render(f"Inventar", True, (255, 255, 255)), (x, y + 240))
             screen.blit(font.render(f"Exit", True, (50, 50, 50)), (x + 4, y + 364))
             screen.blit(font.render(f"Exit", True, (255, 255, 255)), (x, y + 360))
         elif abilitky:
@@ -60,12 +62,12 @@ class Prahadex:
                 y += 120
 
 
-def sipecka(screen, imgs, pozice, pozicemenu, menu, offset=0):
-    if not menu:
+def sipecka(screen, imgs, pozice, pozicemenu, menu, offset=0, abilitky=False):
+    if not menu and not abilitky:
         relative_pos = pozice - offset
         y = 100 + (relative_pos - 1) * 120
         screen.blit(imgs.sipkaphd, (730, y))
-    if menu:
+    elif menu or abilitky:
         y = 100 + (pozicemenu - 1) * 120
         screen.blit(imgs.sipkaphd, (730, y))
 

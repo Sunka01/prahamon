@@ -49,6 +49,7 @@ def handle(hra, event):
             if hra.show_prahadex:
                 if hra.show_prahadexmenu:
                     if hra.pozicephdxmenu == 1:
+                        hra.pozicephdxmenu = 1
                         hra.abilitymenu = True
                         hra.show_prahadexmenu = False
                     if hra.pozicephdxmenu == 2:
@@ -64,6 +65,8 @@ def handle(hra, event):
                             hra.poziceinventare = 1
                     if hra.pozicephdxmenu == 4:
                         hra.show_prahadexmenu = False
+                elif hra.abilitymenu:
+                    pass
                 elif not hra.show_prahadexmenu:
                     hra.show_prahadexmenu = True
 
@@ -140,19 +143,29 @@ def handle(hra, event):
 
         if hra.show_prahadex:
             if event.key == pygame.K_ESCAPE:
-                hra.show_prahadex = False
-                hra.show_prahadexmenu = False
-                hra.abilitymenu = False
-                if not hra.battle:
-                    hra.menu = True
-                hra.poziceinventare = 1
-                hra.inventar_offset = 0
+                if hra.abilitymenu:
+                    hra.abilitymenu = False
+                    hra.show_prahadexmenu = True
+                    hra.pozicephdxmenu = 1
+                elif hra.show_prahadexmenu:
+                    hra.show_prahadexmenu = False
+                else:
+                    hra.show_prahadex = False
+                    if not hra.battle:
+                        hra.menu = True
+                    hra.poziceinventare = 1
+                    hra.inventar_offset = 0
+                return
+
             if event.key == pygame.K_w:
                 if not hra.show_prahadexmenu and not hra.abilitymenu:
                     if hra.poziceinventare > 1:
                         hra.poziceinventare -= 1
                         if hra.poziceinventare < hra.inventar_offset + 1:
                             hra.inventar_offset -= 1
+                elif hra.abilitymenu:
+                    if hra.pozicephdxmenu > 1:
+                        hra.pozicephdxmenu -= 1
                 else:
                     if hra.pozicephdxmenu > 1:
                         hra.pozicephdxmenu -= 1
@@ -163,6 +176,11 @@ def handle(hra, event):
                         hra.poziceinventare += 1
                         if hra.poziceinventare > hra.inventar_offset + 4:
                             hra.inventar_offset += 1
+                elif hra.abilitymenu:
+                    prahamoni = list(prahadex.prahadex.prahamoni.values())
+                    vybran = prahamoni[hra.poziceinventare - 1]
+                    if hra.pozicephdxmenu < len(vybran.abilities):
+                        hra.pozicephdxmenu += 1
                 else:
                     if hra.pozicephdxmenu < 4:
                         hra.pozicephdxmenu += 1
