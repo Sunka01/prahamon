@@ -25,9 +25,10 @@ class Shop:
         items = list(self.nabidka.values())
         visible = items[offset:offset + limit]
         for p in visible:
-            text = font.render(f"{p.name} : {p.cena}Czk", True, (0, 0, 0))
-            texta = font.render(f"{p.name} : {p.cena}Czk", True, (150, 150, 150))
-            screen.blit(imgs.inventar_obrazky.get(p.name), (x-80, y))
+            text = font.render(f"{p.name} | {p.cena}Czk", True, (0, 0, 0))
+            texta = font.render(f"{p.name} | {p.cena}Czk", True, (170, 170, 170))
+            if imgs.inventar_obrazky.get(p.name) is not None:
+                screen.blit(imgs.inventar_obrazky.get(p.name), (x - 80, y))
             screen.blit(texta, (x+3, y+3))
             screen.blit(text, (x, y))
 
@@ -49,7 +50,11 @@ class ShopList:
 shop = Shop()
 
 nab = [
-    ShopList("Prahaball", 100)
+    ShopList("Prahaball", 100),
+    ShopList("Pivko", 100),
+    ShopList("Pivka", 100),
+    ShopList("Pivke", 100),
+    ShopList("Pivkq", 100),
 ]
 
 for p in nab:

@@ -28,6 +28,7 @@ def handle(hra, event):
                     hra.med = False
                     hra.show = False
                     hra.zaplejdialog = False
+                    hra.medp = 1
             elif hra.show or hra.zaplejdialog and not hra.med:
                 hra.zaplejdialog = False
                 hra.show = False
@@ -47,6 +48,9 @@ def handle(hra, event):
                     hra.zaplejdialog = True
             if hra.show_prahadex:
                 if hra.show_prahadexmenu:
+                    if hra.pozicephdxmenu == 1:
+                        hra.abilitymenu = True
+                        hra.show_prahadexmenu = False
                     if hra.pozicephdxmenu == 2:
                         prahamoni = list(prahadex.prahadex.prahamoni.values())
                         if prahamoni and hra.poziceinventare <= len(prahamoni):
@@ -122,6 +126,7 @@ def handle(hra, event):
                 if not hra.battle:
                     hra.menu = True
                 hra.poziceinventare = 1
+                hra.inventar_offset = 0
             if event.key == pygame.K_w:
                 if hra.poziceinventare > 1:
                     hra.poziceinventare -= 1
@@ -137,11 +142,13 @@ def handle(hra, event):
             if event.key == pygame.K_ESCAPE:
                 hra.show_prahadex = False
                 hra.show_prahadexmenu = False
+                hra.abilitymenu = False
                 if not hra.battle:
                     hra.menu = True
                 hra.poziceinventare = 1
+                hra.inventar_offset = 0
             if event.key == pygame.K_w:
-                if not hra.show_prahadexmenu:
+                if not hra.show_prahadexmenu and not hra.abilitymenu:
                     if hra.poziceinventare > 1:
                         hra.poziceinventare -= 1
                         if hra.poziceinventare < hra.inventar_offset + 1:
@@ -151,7 +158,7 @@ def handle(hra, event):
                         hra.pozicephdxmenu -= 1
 
             if event.key == pygame.K_s:
-                if not hra.show_prahadexmenu:
+                if not hra.show_prahadexmenu and not hra.abilitymenu:
                     if hra.poziceinventare < len(prahadex.prahadex.prahamoni):
                         hra.poziceinventare += 1
                         if hra.poziceinventare > hra.inventar_offset + 4:
@@ -196,7 +203,17 @@ def handle(hra, event):
                 elif hra.medp == 2:
                     hra.medp = 1
 
-
+        if hra.shop:
+            if event.key == pygame.K_w:
+                if hra.poziceinventare > 1:
+                    hra.poziceinventare -= 1
+                    if hra.poziceinventare < hra.inventar_offset + 1:
+                        hra.inventar_offset -= 1
+            if event.key == pygame.K_s:
+                if hra.poziceinventare < len(shop.shop.nabidka):
+                    hra.poziceinventare += 1
+                    if hra.poziceinventare > hra.inventar_offset + 4:
+                        hra.inventar_offset += 1
 
         if event.key == pygame.K_ESCAPE:
             if hra.shop:
@@ -204,3 +221,4 @@ def handle(hra, event):
                 hra.menu = False
                 hra.shopopen = False
                 hra.poziceinventare = 1
+                hra.inventar_offset = 0

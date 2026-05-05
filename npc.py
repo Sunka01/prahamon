@@ -23,9 +23,18 @@ class Npc:
         return hrachitbox.colliderect(self.hitbox)
 
 
+class Ability:
+    def __init__(self, name, damage, pp, max_pp):
+        self.name = name
+        self.damage = damage
+        self.pp = pp
+        self.max_pp = max_pp
+
+
 class Prahamon:
-    def __init__(self, name, hp, maxhp, lvl):
+    def __init__(self, name, hp, maxhp, lvl, abilities):
         self.name = name
         self.hp = hp
         self.maxhp = maxhp
         self.lvl = lvl
+        self.abilities = abilities if abilities is not None else []

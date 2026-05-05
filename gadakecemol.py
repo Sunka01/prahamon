@@ -31,6 +31,7 @@ class Hra:
         self.kolizenpc = None
 
         self.menu = False
+        self.abilitymenu = False
 
         self.pozicemenu = pozicemenu
         self.pozice = pozicemenu
@@ -54,6 +55,10 @@ class Hra:
         self.med = False
         self.medp = 1
 
+        zobani = npc.Ability("Zobani", 5, 35, 35)
+        klovani = npc.Ability("Klovani", 10, 20, 20)
+        sykot = npc.Ability("Sykot", 15, 15, 15)
+
 
         self.predmety = [
             predmety.Predmet("Prahaball", imgs.prahaball, 1620, 1220),
@@ -75,16 +80,16 @@ class Hra:
 
 
         self.prahamon = [
-            npc.Prahamon("Ptak", 10, 15, 1),
-            npc.Prahamon("Twitter", 15, 15, 2),
-            npc.Prahamon("Twilight", 20, 20, 3),
+            npc.Prahamon("Ptak", 10, 15, 1, [zobani, klovani, sykot]),
+            npc.Prahamon("Twitter", 15, 15, 2, [zobani, klovani]),
+            npc.Prahamon("Twilight", 20, 20, 3, [zobani, sykot]),
             # prahamoni
         ]
 
         self.protivnici = [
-            npc.Prahamon("Ptak;", 10, 15, 1),
-            npc.Prahamon("Twitter", 15, 15, 2),
-            npc.Prahamon("Twilight", 20, 20, 3),
+            npc.Prahamon("Ptak;", 10, 15, 1, [zobani, sykot]),
+            npc.Prahamon("Twitter", 15, 15, 2, [zobani, sykot]),
+            npc.Prahamon("Twilight", 20, 20, 3, [zobani, sykot]),
 
         ]
 
@@ -211,7 +216,7 @@ class Hra:
             """ZDI"""
             for zed in self.zdi:
                 pass
-                pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
+                # pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
 
             for item in self.npc:
                 if item.kolize(self.mchitboxcol):
@@ -243,7 +248,8 @@ class Hra:
                 self.screen.blit(imgs.prahadexdesc, (0, 0))
                 self.screen.blit(self.bigfont.render("PRAHADEX", False, (50, 50, 50)), (125, 95))
                 self.screen.blit(self.bigfont.render("PRAHADEX", False, (255, 255, 255)), (120, 90))
-                prahadex.prahadex.draw(self.screen, self.font, self.inventar_offset, 4, self.poziceinventare, imgs, self.show_prahadexmenu)
+                prahadex.prahadex.draw(self.screen, self.font, self.inventar_offset, 4, self.poziceinventare, imgs,
+                                       self.show_prahadexmenu, self.abilitymenu)
                 prahadex.sipecka(self.screen,imgs,self.poziceinventare,self.pozicephdxmenu, self.show_prahadexmenu, self.inventar_offset)
 
             if self.show_mapa:

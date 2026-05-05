@@ -31,7 +31,8 @@ class Inventory:
         for item, qty in visible:
             texta = font.render(f"{qty}x    {item} ", True, (150, 150, 150))
             text = font.render(f"{qty}x    {item} ", True, (0, 0, 0))
-            screen.blit(imgs.inventar_obrazky.get(str(item)), (800, y))
+            if imgs.inventar_obrazky.get(str(item)) is not None:
+                screen.blit(imgs.inventar_obrazky.get(str(item)), (800, y))
             screen.blit(texta, (x+3, y+3))
             screen.blit(text, (x, y))
             y += 120

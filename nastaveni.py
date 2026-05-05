@@ -69,8 +69,8 @@ sipkabattle = img("obrazky/sipka.png", (30, 30))
 
 # ---- PREDMETY -----
 
-prahaball = img("obrazky/prahabally/prahaballbasic.png", (48, 48))
-pivko = img("obrazky/prahabally/pivko.png", (24, 45))
+prahaball = img("obrazky/prahabally/prahaballbasic.png", (45, 45))
+pivko = img("obrazky/prahabally/pivko.png", (45, 45))
 
 
 # sem proste davej ty obrazky ono by se to pak moc stradalo, az toho bude vic rozdelime to do vic categories
