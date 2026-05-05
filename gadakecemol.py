@@ -1,4 +1,4 @@
-import databaze, mapa, nabidka, eventy, inventar, npc, predmety, pygame, pytmx, battle
+import databaze, mapa, nabidka, eventy, inventar, npc, predmety, pygame, pytmx, battle, prahadex
 import nastaveni as imgs
 import shop
 from npc import *
@@ -11,7 +11,7 @@ pygame.display.set_caption("Prahamon")
 
 class Hra:
 
-    def __init__(self, x=310, y=360, rychlost=4, pozicemenu=1, poziceinventare=1):
+    def __init__(self, x=310, y=360, rychlost=4, pozicemenu=1, poziceinventare=1, pozicephdxmenu=1):
         self.prahamoni = None
         self.rychlost = rychlost
         self.x = x
@@ -35,9 +35,11 @@ class Hra:
         self.pozicemenu = pozicemenu
         self.pozice = pozicemenu
         self.poziceinventare = poziceinventare
+        self.pozicephdxmenu = pozicephdxmenu
 
         self.show_inventar = False
         self.show_prahadex = False
+        self.show_prahadexmenu = False
         self.show_mapa = False
         self.inventar_offset = 0
 
@@ -241,8 +243,8 @@ class Hra:
                 self.screen.blit(imgs.prahadexdesc, (0, 0))
                 self.screen.blit(self.bigfont.render("PRAHADEX", False, (50, 50, 50)), (125, 95))
                 self.screen.blit(self.bigfont.render("PRAHADEX", False, (255, 255, 255)), (120, 90))
-                prahadex.prahadex.draw(self.screen, self.font, self.inventar_offset, 4, self.poziceinventare, imgs)
-                prahadex.sipecka(self.screen,imgs,self.poziceinventare, self.inventar_offset)
+                prahadex.prahadex.draw(self.screen, self.font, self.inventar_offset, 4, self.poziceinventare, imgs, self.show_prahadexmenu)
+                prahadex.sipecka(self.screen,imgs,self.poziceinventare,self.pozicephdxmenu, self.show_prahadexmenu, self.inventar_offset)
 
             if self.show_mapa:
                 self.screen.blit(imgs.mapicka, (0, 0))
