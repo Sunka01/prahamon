@@ -13,9 +13,7 @@ class Hra:
 
     def __init__(self, x=310, y=360, rychlost=4, pozicemenu=1, poziceinventare=1, pozicephdxmenu=1):
 
-        pygame.mixer.init()
-        pygame.mixer.music.load("muzika/menu.mp3")
-        pygame.mixer.music.play(-1)
+
 
         self.prahamoni = None
         self.rychlost = rychlost
@@ -59,6 +57,8 @@ class Hra:
         self.battle = False
         self.med = False
         self.medp = 1
+
+        self.current_music = None
 
         zobani = npc.Ability("Zobani", 5, 35, 35)
         klovani = npc.Ability("Klovani", 10, 20, 20)
@@ -187,6 +187,12 @@ class Hra:
             self.random = random.randint(1, 3)
             self.randomtrava = random.randint(1, 500)
 
+            if self.current_music is None:
+                pygame.mixer.init()
+                pygame.mixer.music.load("muzika/menu.mp3")
+                pygame.mixer.music.play(-1)
+                self.current_music = "game"
+
             if hra.oak_chce_jit:
                 hra.npc_movement()
 
@@ -238,6 +244,10 @@ class Hra:
                 self.battle = True
 
             if self.menu:
+                if self.current_music != "menu":
+                    pygame.mixer.music.load("muzika/surprises.mp3")
+                    pygame.mixer.music.play(-1)
+                    self.current_music = "menu"
                 nabidka.draw(self.screen, imgs, self.font)
                 nabidka.sipecka(self.screen, imgs, self.pozicemenu)
 

@@ -90,6 +90,7 @@ def handle(hra, event):
         if not hra.shop and not hra.show and not hra.shopopen and not hra.show_prahadex and not hra.show_mapa and not hra.battle:
             if event.key == pygame.K_ESCAPE:
                 hra.menu = not hra.menu
+                hra.current_music = None
 
 
         if event.key == pygame.K_h:
@@ -111,12 +112,15 @@ def handle(hra, event):
             elif hra.pozicemenu == 3 and event.key == pygame.K_e:
                 hra.show_prahadex = True
                 hra.menu = False
+                hra.current_music = None
             elif hra.pozicemenu == 2 and event.key == pygame.K_e:
                 hra.show_mapa = True
                 hra.menu = False
+                hra.current_music = None
             elif hra.pozicemenu == 1 and event.key == pygame.K_e:
                 hra.show_inventar = True
                 hra.menu = False
+                hra.current_music = None
             elif event.key == pygame.K_p:
                 if hra.battle:
                     hra.battle = False
@@ -241,3 +245,4 @@ def handle(hra, event):
                 hra.shopopen = False
                 hra.poziceinventare = 1
                 hra.inventar_offset = 0
+                hra.current_music = None
