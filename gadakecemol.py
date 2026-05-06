@@ -25,6 +25,7 @@ class Hra:
         self.font = pygame.font.Font("pokemon_pixel_font.ttf", 64)
         self.bigfont = pygame.font.Font("pokemon_pixel_font.ttf", 82)
         self.animace_chozeni_ted = 0
+        self.posledni_smer = imgs.postava
         self.show = False
         self.zaplejdialog = False
         self.nejakejplaceholder = False
@@ -142,19 +143,25 @@ class Hra:
 
         if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_prahadex and not self.show_inventar and not self.shop and not self.battle and not self.med:
 
-
             if keys[pygame.K_w]:
                 self.y -= self.rychlost
-                self.postava = imgs.zadek[int(self.animace_chozeni_ted)]
+                self.posledni_smer = imgs.zadek
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
             elif keys[pygame.K_s]:
                 self.y += self.rychlost
-                self.postava = imgs.postava[int(self.animace_chozeni_ted)]
+                self.posledni_smer = imgs.postava
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
             elif keys[pygame.K_a] and not keys[pygame.K_d]:
                 self.x -= self.rychlost
-                self.postava = imgs.leva[int(self.animace_chozeni_ted)]
+                self.posledni_smer = imgs.leva
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
             elif keys[pygame.K_d] and not keys[pygame.K_a]:
                 self.x += self.rychlost
-                self.postava = imgs.prava[int(self.animace_chozeni_ted)]
+                self.posledni_smer = imgs.prava
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
+            else:
+                self.animace_chozeni_ted = 0
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
 
     def animace(self):
         keys = pygame.key.get_pressed()
