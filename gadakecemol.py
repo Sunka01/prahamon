@@ -12,6 +12,11 @@ pygame.display.set_caption("Prahamon")
 class Hra:
 
     def __init__(self, x=310, y=360, rychlost=4, pozicemenu=1, poziceinventare=1, pozicephdxmenu=1):
+
+        pygame.mixer.init()
+        pygame.mixer.music.load("muzika/surprises.mp3")
+        pygame.mixer.music.play(-1)
+
         self.prahamoni = None
         self.rychlost = rychlost
         self.x = x
