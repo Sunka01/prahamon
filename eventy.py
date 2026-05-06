@@ -208,7 +208,8 @@ def handle(hra, event):
 
                 if event.key == pygame.K_e:
                     if hra.pozice == 1:
-                        hra.protivnici[0].hp -= 1
+                        if hra.protivnici[0].hp >= 1:
+                            hra.protivnici[0].hp -= 1
                     elif hra.pozice == 3:
                         hra.show_inventar = True
                     elif hra.pozice == 4:
