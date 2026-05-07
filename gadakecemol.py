@@ -25,6 +25,7 @@ class Hra:
         self.font = pygame.font.Font("pokemon_pixel_font.ttf", 64)
         self.bigfont = pygame.font.Font("pokemon_pixel_font.ttf", 82)
         self.animace_chozeni_ted = 0
+        self.posledni_smer = imgs.postava
         self.show = False
         self.zaplejdialog = False
         self.nejakejplaceholder = False
@@ -49,7 +50,8 @@ class Hra:
 
         self.oak_chce_jit = False
 
-        self.penize = 10100
+        self.nedostatek = False
+        self.penize = 100
         self.shop = False
         self.shopopen = False
 
@@ -59,6 +61,9 @@ class Hra:
         self.medp = 1
 
         self.current_music = None
+
+        self.starapozicex = self.x
+        self.starapozicey = self.y
 
         zobani = npc.Ability("Zobani", 5, 35, 35)
         klovani = npc.Ability("Klovani", 10, 20, 20)
@@ -140,21 +145,30 @@ class Hra:
             self.rychlost = 4
             imgs.rychlost_animace_chuze = 0.2
 
-        if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_prahadex and not self.show_inventar and not self.shop and not self.battle and not self.med:
+        self.starapozicex = self.x
+        self.starapozicey = self.y
 
+        if not self.menu and not self.show and not self.show_mapa and not self.show_prahadex and not self.show_inventar and not self.shop and not self.battle and not self.med:
 
             if keys[pygame.K_w]:
                 self.y -= self.rychlost
-                self.postava = imgs.zadek[int(self.animace_chozeni_ted)]
+                self.posledni_smer = imgs.zadek
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
             elif keys[pygame.K_s]:
                 self.y += self.rychlost
-                self.postava = imgs.postava[int(self.animace_chozeni_ted)]
+                self.posledni_smer = imgs.postava
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
             elif keys[pygame.K_a] and not keys[pygame.K_d]:
                 self.x -= self.rychlost
-                self.postava = imgs.leva[int(self.animace_chozeni_ted)]
+                self.posledni_smer = imgs.leva
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
             elif keys[pygame.K_d] and not keys[pygame.K_a]:
                 self.x += self.rychlost
-                self.postava = imgs.prava[int(self.animace_chozeni_ted)]
+                self.posledni_smer = imgs.prava
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
+            else:
+                self.animace_chozeni_ted = 0
+                self.postava = self.posledni_smer[int(self.animace_chozeni_ted)]
 
     def animace(self):
         keys = pygame.key.get_pressed()
@@ -200,6 +214,12 @@ class Hra:
                                         self.postava_height - 8)
             self.mchitboxcol = pygame.Rect(self.x + 10, self.y + 16, self.postava_width - 20, self.postava_height - 16)
 
+            self.maphitbox = pygame.Rect(self.x + 20 - self.camera_x, self.y + 14 - self.camera_y,
+                                         self.postava_width - 40,
+                                         self.postava_height - 20)
+            self.maphitboxcol = pygame.Rect(self.x + 20, self.y + 14, self.postava_width - 40, self.postava_height - 20)
+
+
             self.trava = pygame.Rect(1060 - self.camera_x, 0 - self.camera_y, 820, 400)
 
             mapa.vykresli_zem(self.screen, self.map, self.camera_x, self.camera_y)
@@ -220,14 +240,22 @@ class Hra:
             self.screen.blit(self.postava, (self.x - self.camera_x, self.y - self.camera_y))
 
             """HITBOXY"""
-            for id in self.npc: pygame.draw.rect(self.screen, (255, 0, 255), (id.hitbox.x - self.camera_x,id.hitbox.y - self.camera_y,id.hitbox.width,id.hitbox.height), 4)
+            # for id in self.npc: pygame.draw.rect(self.screen, (255, 0, 255), (id.hitbox.x - self.camera_x,id.hitbox.y - self.camera_y,id.hitbox.width,id.hitbox.height), 4)
 
             """MAIN CHARACTER"""
-            #pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
+            pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
+            # pygame.draw.rect(self.screen, (255, 255, 255), self.mchitboxcol, 2)
+            pygame.draw.rect(self.screen, (255, 255, 0), self.maphitbox, 2)
+            #pygame.draw.rect(self.screen, (255, 255, 255), self.maphitboxcol, 2)
             """ZDI"""
             for zed in self.zdi:
                 pass
                 # pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
+            for zed in self.zdi:
+                if self.maphitboxcol.colliderect(zed):
+                    self.x = self.starapozicex
+                    self.y = self.starapozicey
+
 
             for item in self.npc:
                 if item.kolize(self.mchitboxcol):
@@ -281,6 +309,8 @@ class Hra:
                 shop.shop.draw(self.screen, self.font, self.inventar_offset, 4)
                 shop.sipecka(self.screen, imgs, self.poziceinventare, self.inventar_offset)
 
+
+
             if hra.catch and hra.nejakejplaceholder:
                 if inventar.inventory.has("prahaball"):
                     if self.random == 3:
@@ -318,6 +348,15 @@ class Hra:
                     elif self.medp == 2:
                         self.screen.blit(imgs.sipkaphd, (1060,665))
 
+            if self.nedostatek:
+                npa = self.bigfont.render("Nedostatek penez ", False, (150, 150, 150))
+                np = self.bigfont.render("Nedostatek penez ", False, (255, 255, 255))
+                self.screen.blit(npa, (653, 563))
+                self.screen.blit(np, (650, 560))
+                pygame.display.update()
+                pygame.time.delay(700)
+
+                self.nedostatek = False
 
             self.animace()
             pygame.display.flip()
