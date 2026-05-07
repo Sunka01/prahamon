@@ -1,3 +1,5 @@
+import time
+
 import pygame
 import sys
 
@@ -83,7 +85,7 @@ def handle(hra, event):
                         hra.penize -= vyber.cena
                     else:
                         hra.dialog = "Nedostatek penez"
-                        hra.show = True
+                        hra.nedostatek = True
             for item in hra.predmety:
                 item.sebrano(hra.mchitboxcol, inventar.inventory)
 
