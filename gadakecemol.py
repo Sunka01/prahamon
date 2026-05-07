@@ -190,7 +190,7 @@ class Hra:
             if self.current_music is None:
                 pygame.mixer.init()
                 pygame.mixer.music.load("muzika/menu.mp3")
-                pygame.mixer.music.play(-1)git
+                pygame.mixer.music.play(-1)
                 self.current_music = "game"
 
             if hra.oak_chce_jit:
