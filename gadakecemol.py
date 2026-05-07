@@ -214,6 +214,11 @@ class Hra:
                                         self.postava_height - 8)
             self.mchitboxcol = pygame.Rect(self.x + 10, self.y + 16, self.postava_width - 20, self.postava_height - 16)
 
+            self.maphitbox = pygame.Rect(self.x + 20 - self.camera_x, self.y + 14 - self.camera_y, self.postava_width - 40,
+                                        self.postava_height - 20)
+            self.maphitboxcol = pygame.Rect(self.x + 20, self.y + 14, self.postava_width - 40, self.postava_height - 20)
+
+
             self.trava = pygame.Rect(1060 - self.camera_x, 0 - self.camera_y, 820, 400)
 
             mapa.vykresli_zem(self.screen, self.map, self.camera_x, self.camera_y)
@@ -238,15 +243,17 @@ class Hra:
 
             """MAIN CHARACTER"""
             pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
+            #pygame.draw.rect(self.screen, (255, 255, 255), self.mchitboxcol, 2)
+            pygame.draw.rect(self.screen, (255, 255, 0), self.maphitbox, 2)
+            #pygame.draw.rect(self.screen, (255, 255, 255), self.maphitboxcol, 2)
             """ZDI"""
             for zed in self.zdi:
                 pass
                 #pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
             for zed in self.zdi:
-                if self.mchitboxcol.colliderect(zed):
+                if self.maphitboxcol.colliderect(zed):
                     self.x = self.starapozicex
                     self.y = self.starapozicey
-                    # TODO: TADY NEJAK CHECKNOUT A ZASTAVIT CHUZI ALE ABY NEBYLA ZASTAVENAAA
 
 
             for item in self.npc:
