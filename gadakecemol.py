@@ -83,8 +83,8 @@ class Hra:
         self.npc = [
             npc.Npc("oak", imgs.oak, 1620, 1420, dialog=databaze.dialog1),
             npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog=databaze.dialog2),
-            npc.Npc("cong", imgs.cong, 660, 420),
-            npc.Npc("doctor", imgs.doctor, 1060, 1420, dialog="Chces vylecit sve Prahamony?")
+            npc.Npc("cong", imgs.cong, 300, 200),
+            npc.Npc("doctor", imgs.doctor, 300, 600, dialog="Chces vylecit sve Prahamony?")
         ]
             # sem muzes davat npcs
 
@@ -214,10 +214,11 @@ class Hra:
                                         self.postava_height - 8)
             self.mchitboxcol = pygame.Rect(self.x + 10, self.y + 16, self.postava_width - 20, self.postava_height - 16)
 
-            self.maphitbox = pygame.Rect(self.x + 20 - self.camera_x, self.y + 14 - self.camera_y,
+            self.maphitbox = pygame.Rect(self.x + 20 - self.camera_x, self.y + 50 - self.camera_y,
                                          self.postava_width - 40,
-                                         self.postava_height - 20)
-            self.maphitboxcol = pygame.Rect(self.x + 20, self.y + 14, self.postava_width - 40, self.postava_height - 20)
+                                         self.postava_height - 60)
+            self.maphitboxcol = pygame.Rect(self.x + 40, self.y + 80, self.postava_width - 80,
+                                            self.postava_height - 100)
 
 
             self.trava = pygame.Rect(1060 - self.camera_x, 0 - self.camera_y, 820, 400)
@@ -243,14 +244,14 @@ class Hra:
             # for id in self.npc: pygame.draw.rect(self.screen, (255, 0, 255), (id.hitbox.x - self.camera_x,id.hitbox.y - self.camera_y,id.hitbox.width,id.hitbox.height), 4)
 
             """MAIN CHARACTER"""
-            pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
+            # pygame.draw.rect(self.screen, (255, 0, 0), self.mchitbox, 2)
             # pygame.draw.rect(self.screen, (255, 255, 255), self.mchitboxcol, 2)
-            pygame.draw.rect(self.screen, (255, 255, 0), self.maphitbox, 2)
-            #pygame.draw.rect(self.screen, (255, 255, 255), self.maphitboxcol, 2)
+            # pygame.draw.rect(self.screen, (255, 255, 0), self.maphitbox, 2)
+            #pygame.draw.rect(self.screen, (255, 0, 255), self.maphitboxcol, 2)
             """ZDI"""
             for zed in self.zdi:
                 pass
-                # pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
+                #pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
             for zed in self.zdi:
                 if self.maphitboxcol.colliderect(zed):
                     self.x = self.starapozicex
