@@ -256,6 +256,7 @@ class Hra:
                 if self.maphitboxcol.colliderect(zed):
                     self.x = self.starapozicex
                     self.y = self.starapozicey
+                pass
 
 
             for item in self.npc:
