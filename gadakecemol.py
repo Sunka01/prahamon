@@ -65,6 +65,7 @@ class Hra:
         self.starapozicex = self.x
         self.starapozicey = self.y
 
+
         zobani = npc.Ability("Zobani", 5, 35, 35)
         klovani = npc.Ability("Klovani", 10, 20, 20)
         sykot = npc.Ability("Sykot", 15, 15, 15)
@@ -108,14 +109,22 @@ class Hra:
 
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
-        self.map = pytmx.load_pygame("map.tmx", pixelalpha=True)
-        self.zdi = mapa.nacti_hitboxy_mapy(self.map)
-        self.map_width = self.map.width * self.map.tilewidth
-        self.map_height = self.map.height * self.map.tileheight
+        self.lokace("Praha")
 
         self.postava = imgs.postava[0]
         self.postava_height = self.postava.get_height()
         self.postava_width = self.postava.get_width()
+
+    def lokace(self, name):
+        maps = {
+            "Praha": "map.tmx",
+            "Viden": "untitled.tmx",
+        }
+        self.nactena = name
+        self.map = pytmx.load_pygame(maps[name], pixelalpha=True)
+        self.zdi = mapa.nacti_hitboxy_mapy(self.map)
+        self.map_width = self.map.width * self.map.tilewidth
+        self.map_height = self.map.height * self.map.tileheight
 
     def npc_movement(self):
         cil_y = 1620

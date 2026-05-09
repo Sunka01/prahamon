@@ -96,6 +96,12 @@ def handle(hra, event):
         if event.key == pygame.K_h:
             hra.oak_chce_jit = True
 
+        if event.key == pygame.K_l:
+            if hra.nactena == "Praha":
+                hra.lokace("Viden")
+            elif hra.nactena == "Viden":
+                hra.lokace("Praha")
+
         if hra.menu:
             if not hra.show_inventar or not hra.show_prahadex or not hra.show_mapa or not hra.shop:
                 if event.key == pygame.K_w:
