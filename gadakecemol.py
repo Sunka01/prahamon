@@ -33,6 +33,9 @@ class Hra:
 
         self.kolize = False
         self.kolizenpc = None
+        self.portalcol = False
+        self.portalPVx = 1930
+        self.portalPVy = 1180
 
         self.menu = False
         self.abilitymenu = False
@@ -263,10 +266,34 @@ class Hra:
                 #pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
             for zed in self.zdi:
                 if self.maphitboxcol.colliderect(zed):
-                    self.x = self.starapozicex
-                    self.y = self.starapozicey
+                    #self.x = self.starapozicex
+                    #elf.y = self.starapozicey
+                    pass
                 pass
 
+            portales = pygame.Rect(self.portalPVx - 30 - self.camera_x, self.portalPVy - self.camera_y,20, 200 )
+            pygame.draw.rect(self.screen, (255, 0, 255), portales, 2)
+
+            if self.mchitbox.colliderect(portales):
+                self.portalcol = True
+
+            if self.portalcol:
+                if hra.nactena == "Praha":
+                    self.x = 100
+                    self.y = 100
+                    self.lokace("Viden")
+                    self.portalPVx = 40
+                    self.portalPVy = 70
+                    pygame.time.wait(200)
+                    self.portalcol = False
+                elif hra.nactena == "Viden":
+                    self.x = 1770
+                    self.y = 1220
+                    self.lokace("Praha")
+                    self.portalPVx = 1930
+                    self.portalPVy = 1180
+                    pygame.time.wait(200)
+                    self.portalcol = False
 
             for item in self.npc:
                 if item.kolize(self.mchitboxcol):
