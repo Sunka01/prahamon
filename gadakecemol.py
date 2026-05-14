@@ -213,7 +213,7 @@ class Hra:
             if self.current_music is None:
                 pygame.mixer.init()
                 pygame.mixer.music.load("muzika/menu.mp3")
-                pygame.mixer.music.play(-1)
+                #pygame.mixer.music.play(-1)
                 self.current_music = "game"
 
             if hra.oak_chce_jit:
@@ -362,8 +362,11 @@ class Hra:
             if self.nedostatek:
                 npa = self.bigfont.render("Nedostatek penez ", False, (150, 150, 150))
                 np = self.bigfont.render("Nedostatek penez ", False, (255, 255, 255))
+
                 self.screen.blit(npa, (653, 563))
                 self.screen.blit(np, (650, 560))
+
+
                 pygame.display.update()
                 pygame.time.delay(700)
 
