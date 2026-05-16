@@ -216,7 +216,7 @@ class Hra:
             if self.current_music is None:
                 pygame.mixer.init()
                 pygame.mixer.music.load("muzika/menu.mp3")
-                #pygame.mixer.music.play(-1)
+                pygame.mixer.music.play(-1)
                 self.current_music = "game"
 
             if hra.oak_chce_jit:
@@ -266,8 +266,8 @@ class Hra:
                 #pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
             for zed in self.zdi:
                 if self.maphitboxcol.colliderect(zed):
-                    #self.x = self.starapozicex
-                    #elf.y = self.starapozicey
+                    self.x = self.starapozicex
+                    self.y = self.starapozicey
                     pass
                 pass
 
