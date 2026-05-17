@@ -1,4 +1,4 @@
-import databaze, mapa, nabidka, eventy, inventar, npc, predmety, pygame, pytmx, battle, prahadex
+import databaze, mapa, nabidka, eventy, inventar, npc, predmety, pygame, pytmx, battle, prahadex, lokace
 import nastaveni as imgs
 import shop
 from npc import *
@@ -74,23 +74,7 @@ class Hra:
         sykot = npc.Ability("Sykot", 15, 15, 15)
 
 
-        self.predmety = [
-            predmety.Predmet("Prahaball", imgs.prahaball, 1620, 1220),
-            predmety.Predmet("Pivko", imgs.pivko, 1520, 1220),
-            predmety.Predmet("Pivko", imgs.pivko, 1520, 1120),
-            predmety.Predmet("Pivko", imgs.pivko, 1520, 1020),
-            predmety.Predmet("Pivko", imgs.pivko, 1520, 920),
-            predmety.Predmet("Pivko", imgs.pivko, 1520, 820),
-            predmety.Predmet("Pivko", imgs.pivko, 1520, 720),
-            # sem muzes davat predmety
-        ]
-        self.npc = [
-            npc.Npc("oak", imgs.oak, 1620, 1420, dialog=databaze.dialog1),
-            npc.Npc("babisek", imgs.babisek, 1660, 1420, dialog=databaze.dialog2),
-            npc.Npc("cong", imgs.cong, 300, 200),
-            npc.Npc("doctor", imgs.doctor, 300, 600, dialog="Chces vylecit sve Prahamony?")
-        ]
-            # sem muzes davat npcs
+
 
 
         self.prahamon = [
@@ -112,22 +96,24 @@ class Hra:
 
         # --- MAPA --- #
         self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
-        self.lokace("Praha")
 
         self.postava = imgs.postava[0]
         self.postava_height = self.postava.get_height()
         self.postava_width = self.postava.get_width()
 
-    def lokace(self, name):
+    def lokaceload(self, name):
         maps = {
             "Praha": "map.tmx",
             "Viden": "untitled.tmx",
         }
+        lokaceitems = lokace.locations[name]
         self.nactena = name
         self.map = pytmx.load_pygame(maps[name], pixelalpha=True)
         self.zdi = mapa.nacti_hitboxy_mapy(self.map)
         self.map_width = self.map.width * self.map.tilewidth
         self.map_height = self.map.height * self.map.tileheight
+        self.npc = lokaceitems["npcs"]
+        self.predmety = lokaceitems["predmety"]
 
     def npc_movement(self):
         cil_y = 1620
@@ -216,7 +202,7 @@ class Hra:
             if self.current_music is None:
                 pygame.mixer.init()
                 pygame.mixer.music.load("muzika/menu.mp3")
-                #pygame.mixer.music.play(-1)
+                pygame.mixer.music.play(-1)
                 self.current_music = "game"
 
             if hra.oak_chce_jit:
@@ -281,7 +267,7 @@ class Hra:
                 if hra.nactena == "Praha":
                     self.x = 100
                     self.y = 100
-                    self.lokace("Viden")
+                    self.lokaceload("Viden")
                     self.portalPVx = 40
                     self.portalPVy = 70
                     pygame.time.wait(200)
@@ -289,7 +275,7 @@ class Hra:
                 elif hra.nactena == "Viden":
                     self.x = 1770
                     self.y = 1220
-                    self.lokace("Praha")
+                    self.lokaceload("Praha")
                     self.portalPVx = 1930
                     self.portalPVy = 1180
                     pygame.time.wait(200)
@@ -405,4 +391,5 @@ class Hra:
 
 
 hra = Hra()
+hra.lokaceload("Praha")
 hra.loop()
