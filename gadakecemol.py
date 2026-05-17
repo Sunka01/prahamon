@@ -252,8 +252,8 @@ class Hra:
                 #pygame.draw.rect(self.screen, (255, 0, 0),(zed.x - self.camera_x, zed.y - self.camera_y, zed.width, zed.height), 4)
             for zed in self.zdi:
                 if self.maphitboxcol.colliderect(zed):
-                    #self.x = self.starapozicex
-                    #elf.y = self.starapozicey
+                    self.x = self.starapozicex
+                    self.y = self.starapozicey
                     pass
                 pass
 
