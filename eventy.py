@@ -1,6 +1,5 @@
 import pygame
 import sys
-
 import battle
 import databaze
 import inventar
@@ -8,6 +7,8 @@ import prahadex
 import npc
 import shop
 import nastaveni as imgs
+
+
 
 
 def handle(hra, event):
