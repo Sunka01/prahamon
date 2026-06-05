@@ -95,7 +95,7 @@ class Hra:
             prahadex.prahadex.add(p)
 
         # --- MAPA --- #
-        self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
+        self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna), pygame.RESIZABLE)
 
         self.postava = imgs.postava[0]
         self.postava_height = self.postava.get_height()

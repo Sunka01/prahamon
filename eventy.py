@@ -1,6 +1,5 @@
 import pygame
 import sys
-
 import battle
 import databaze
 import inventar
@@ -9,6 +8,8 @@ import npc
 import shop
 import nastaveni as imgs
 
+
+#aaaa
 
 def handle(hra, event):
     if event.type == pygame.QUIT:
