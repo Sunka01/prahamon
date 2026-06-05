@@ -9,7 +9,7 @@ import shop
 import nastaveni as imgs
 
 
-
+#aaaa
 
 def handle(hra, event):
     if event.type == pygame.QUIT:
