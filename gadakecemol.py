@@ -258,7 +258,7 @@ class Hra:
                 pass
 
             portales = pygame.Rect(self.portalPVx - 30 - self.camera_x, self.portalPVy - self.camera_y,20, 200 )
-            pygame.draw.rect(self.screen, (255, 0, 255), portales, 2)
+            # pygame.draw.rect(self.screen, (255, 0, 255), portales, 2)
 
             if self.mchitbox.colliderect(portales):
                 self.portalcol = True
