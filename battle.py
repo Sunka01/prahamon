@@ -1,3 +1,5 @@
+import pygame
+
 import prahadex
 import nastaveni as imgs
 
@@ -38,14 +40,26 @@ def draw(screen, font, hra):
     screen.blit(font.render(f"HP: {protivnik.hp}/{protivnik.maxhp}", False, (150, 150, 150)), (78, 129))
     screen.blit(font.render(f"HP: {protivnik.hp}/{protivnik.maxhp}", False, (0, 0, 0)), (76, 127))
 
-    screen.blit(font.render("Utok", False, (150, 150, 150)), (882, 560))
-    screen.blit(font.render("Utok", False, (0, 0, 0)), (880, 560))
-    screen.blit(font.render("PD", False, (150, 150, 150)), (882, 640))
-    screen.blit(font.render("PD", False, (0, 0, 0)), (880, 640))
-    screen.blit(font.render("Inventar", False, (150, 150, 150)), (1052, 560))
-    screen.blit(font.render("Inventar", False, (0, 0, 0)), (1050, 560))
-    screen.blit(font.render("Run", False, (150, 150, 150)), (1052, 640))
-    screen.blit(font.render("Run", False, (0, 0, 0)), (1050, 640))
+    if hra.abilitybattle:
+        abilities = prahamon.abilities
+        prvni = abilities[0].name if len(abilities) > 0 else " "
+        druhy = abilities[1].name if len(abilities) > 1 else " "
+        treti = abilities[2].name if len(abilities) > 2 else " "
+        ctvrty = abilities[3].name if len(abilities) > 3 else " "
+    elif not hra.abilitybattle:
+        prvni = "Utok"
+        druhy = "PD"
+        treti = "Inventar"
+        ctvrty = "Run"
+
+    screen.blit(font.render(prvni, False, (150, 150, 150)), (882, 560))
+    screen.blit(font.render(prvni, False, (0, 0, 0)), (880, 560))
+    screen.blit(font.render(druhy, False, (150, 150, 150)), (882, 640))
+    screen.blit(font.render(druhy, False, (0, 0, 0)), (880, 640))
+    screen.blit(font.render(treti, False, (150, 150, 150)), (1052, 560))
+    screen.blit(font.render(treti, False, (0, 0, 0)), (1050, 560))
+    screen.blit(font.render(ctvrty, False, (150, 150, 150)), (1052, 640))
+    screen.blit(font.render(ctvrty, False, (0, 0, 0)), (1050, 640))
 
 
 def sipecka(screen, imgs, pozice):
@@ -57,3 +71,26 @@ def sipecka(screen, imgs, pozice):
         screen.blit(imgs.sipkabattle, (1010, 570))
     elif pozice == 4:
         screen.blit(imgs.sipkabattle, (1010, 650))
+
+
+def handle(hra, event):
+    if not hra.show_inventar:
+        if event.key == pygame.K_a:
+            if hra.pozice > 1:
+                hra.pozice -= 1
+            elif hra.pozice == 1:
+                hra.pozice = 4
+
+        if event.key == pygame.K_d:
+            if hra.pozice < 4:
+                hra.pozice += 1
+            elif hra.pozice == 4:
+                hra.pozice = 1
+
+        if event.key == pygame.K_e:
+            if hra.pozice == 1:
+                hra.abilitybattle = True
+            elif hra.pozice == 3:
+                hra.show_inventar = True
+            elif hra.pozice == 4:
+                hra.battle = False

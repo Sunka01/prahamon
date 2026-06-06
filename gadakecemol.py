@@ -1,5 +1,6 @@
 import databaze, mapa, nabidka, eventy, inventar, npc, predmety, pygame, pytmx, battle, prahadex, lokace
 import nastaveni as imgs
+import save
 import shop
 from npc import *
 import random
@@ -60,6 +61,7 @@ class Hra:
 
         self.catch = False
         self.battle = False
+        self.abilitybattle = False
         self.med = False
         self.medp = 1
 
@@ -95,7 +97,7 @@ class Hra:
             prahadex.prahadex.add(p)
 
         # --- MAPA --- #
-        self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna), pygame.RESIZABLE)
+        self.screen = pygame.display.set_mode((imgs.sirka_okna, imgs.vyska_okna))
 
         self.postava = imgs.postava[0]
         self.postava_height = self.postava.get_height()
@@ -393,4 +395,5 @@ class Hra:
 
 hra = Hra()
 hra.lokaceload("Praha")
+save.nacist(hra)
 hra.loop()

@@ -71,4 +71,50 @@ def sipecka(screen, imgs, pozice, pozicemenu, menu, offset=0, abilitky=False):
         y = 100 + (pozicemenu - 1) * 120
         screen.blit(imgs.sipkaphd, (730, y))
 
+
+def handle(hra, event):
+    if event.key == pygame.K_ESCAPE:
+        if hra.abilitymenu:
+            hra.abilitymenu = False
+            hra.show_prahadexmenu = True
+            hra.pozicephdxmenu = 1
+        elif hra.show_prahadexmenu:
+            hra.show_prahadexmenu = False
+        else:
+            hra.show_prahadex = False
+            if not hra.battle:
+                hra.menu = True
+            hra.poziceinventare = 1
+            hra.inventar_offset = 0
+        return
+
+    if event.key == pygame.K_w:
+        if not hra.show_prahadexmenu and not hra.abilitymenu:
+            if hra.poziceinventare > 1:
+                hra.poziceinventare -= 1
+                if hra.poziceinventare < hra.inventar_offset + 1:
+                    hra.inventar_offset -= 1
+        elif hra.abilitymenu:
+            if hra.pozicephdxmenu > 1:
+                hra.pozicephdxmenu -= 1
+        else:
+            if hra.pozicephdxmenu > 1:
+                hra.pozicephdxmenu -= 1
+
+    if event.key == pygame.K_s:
+        if not hra.show_prahadexmenu and not hra.abilitymenu:
+            if hra.poziceinventare < len(prahadex.prahamoni):
+                hra.poziceinventare += 1
+                if hra.poziceinventare > hra.inventar_offset + 4:
+                    hra.inventar_offset += 1
+        elif hra.abilitymenu:
+            prahamoni = list(prahadex.prahamoni.values())
+            vybran = prahamoni[hra.poziceinventare - 1]
+            if hra.pozicephdxmenu < len(vybran.abilities):
+                hra.pozicephdxmenu += 1
+        else:
+            if hra.pozicephdxmenu < 4:
+                hra.pozicephdxmenu += 1
+
+
 prahadex = Prahadex()

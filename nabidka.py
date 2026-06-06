@@ -1,3 +1,8 @@
+import pygame
+import sys
+import save
+import prahadex
+import npc
 
 def draw(screen, imgs, font):
     screen.blit(imgs.menu, (930, 30))
@@ -36,3 +41,38 @@ def sipecka(screen, imgs, pozicemenu):
         screen.blit(imgs.sipka, (960, 265))
     elif pozicemenu == 5:
         screen.blit(imgs.sipka, (960, 330))
+
+
+def handle(hra, event):
+    if not hra.show_inventar or not hra.show_prahadex or not hra.show_mapa or not hra.shop:
+        if event.key == pygame.K_w:
+            if hra.pozicemenu > 1:
+                hra.pozicemenu -= 1
+        if event.key == pygame.K_s:
+            if hra.pozicemenu < 5:
+                hra.pozicemenu += 1
+
+    if hra.pozicemenu == 5 and event.key == pygame.K_e:
+        save.ulozit(hra)
+        pygame.quit()
+        sys.exit()
+    elif hra.pozicemenu == 4 and event.key == pygame.K_e:
+        pass
+    elif hra.pozicemenu == 3 and event.key == pygame.K_e:
+        hra.show_prahadex = True
+        hra.menu = False
+        hra.current_music = None
+    elif hra.pozicemenu == 2 and event.key == pygame.K_e:
+        hra.show_mapa = True
+        hra.menu = False
+        hra.current_music = None
+    elif hra.pozicemenu == 1 and event.key == pygame.K_e:
+        hra.show_inventar = True
+        hra.menu = False
+        hra.current_music = None
+
+    if event.key == pygame.K_p:
+        hra.penize += 100
+        prahadex.prahadex.add(npc.Prahamon("Ptak", 10, 15, 1, [npc.Ability("Zobani", 5, 35, 35)]))
+    if event.key == pygame.K_l:
+        prahadex.prahadex.prahamoni["Ptak"].abilities.append(npc.Ability("Klovani", 10, 20, 20))
