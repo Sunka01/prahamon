@@ -77,16 +77,24 @@ pivko = img("obrazky/prahabally/pivko.png", (45, 45))
 
 # ---- PRAHAMONI -----
 
-ptakzepredu = img("obrazky/prahamoni/ceskylev.png", (440, 380))
+ptakzepredu = img("obrazky/prahamoni/ptakpredek.png", (440, 380))
 ptak = img("obrazky/prahamoni/ptak.png", (480, 480))
 twitter = img("obrazky/prahamoni/twitter.png", (480, 480))
 twilight = img("obrazky/prahamoni/twilight.png", (480, 480))
+krtecek = img("obrazky/prahamoni/krtecek.png", (480, 480))
+meow = img("obrazky/prahamoni/meowie.png", (480, 480))
+meowzepredu = img("obrazky/prahamoni/meowiepredek.png", (440, 380))
+ceskylev = img("obrazky/prahamoni/ceskylev.png", (480, 480))
 
 prahamon_obrazky = {
     "Ptak;": ptakzepredu,
     "Ptak": ptak,
     "Twitter": twitter,
     "Twilight": twilight,
+    "Krtecek;": krtecek,
+    "Meow": meowzepredu,
+    "Meow;": meow,
+    "Cesky Lev;": ceskylev,
 }
 
 inventar_obrazky = {

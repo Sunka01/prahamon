@@ -40,6 +40,7 @@ class Hra:
 
         self.menu = False
         self.abilitymenu = False
+        self.opponentturn = False
 
         self.pozicemenu = pozicemenu
         self.pozice = pozicemenu
@@ -51,6 +52,7 @@ class Hra:
         self.show_prahadexmenu = False
         self.show_mapa = False
         self.inventar_offset = 0
+        self.protivnik_index = 0
 
         self.oak_chce_jit = False
 
@@ -88,8 +90,9 @@ class Hra:
 
         self.protivnici = [
             npc.Prahamon("Ptak;", 10, 15, 1, [zobani, sykot]),
-            npc.Prahamon("Twitter", 15, 15, 2, [zobani, sykot]),
-            npc.Prahamon("Twilight", 20, 20, 3, [zobani, sykot]),
+            npc.Prahamon("Cesky Lev;", 25, 25, 4, [zobani, klovani]),
+            npc.Prahamon("Krtecek;", 30, 30, 5, [zobani, klovani]),
+            npc.Prahamon("Meow;", 30, 30, 5, [zobani, klovani])
 
         ]
 
@@ -291,12 +294,14 @@ class Hra:
 
             if hra.battle:
                 battle.draw(self.screen, self.font, self)
-                battle.sipecka(self.screen, imgs, self.pozice)
+                battle.sipecka(self.screen, imgs, self.pozice, self.font, self)
 
             if self.randomtrava == 20 and self.mchitbox.colliderect(
                     self.trava) and not hra.battle and not hra.menu and hra.nactena == "Praha":
-                hra.protivnici[0].hp = hra.protivnici[0].maxhp
+                if hra.protivnici:
+                    hra.protivnici[0].hp = hra.protivnici[0].maxhp
                 self.battle = True
+                self.protivnik_index = 0
 
             if self.menu:
                 if self.current_music != "menu":
