@@ -77,7 +77,7 @@ pivko = img("obrazky/prahabally/pivko.png", (45, 45))
 
 # ---- PRAHAMONI -----
 
-ptakzepredu = img("obrazky/prahamoni/ptakpredek.png", (440, 380))
+ptakzepredu = img("obrazky/ninja.png", (880, 760))
 ptak = img("obrazky/prahamoni/ptak.png", (480, 480))
 twitter = img("obrazky/prahamoni/twitter.png", (480, 480))
 twilight = img("obrazky/prahamoni/twilight.png", (480, 480))
