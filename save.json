@@ -1,0 +1,79 @@
+{
+  "x": 1442,
+  "y": 261,
+  "penize": 0,
+  "inventar": {
+    "Pivkq": 1,
+    "Pivko": 2,
+    "Prahaball": 1
+  },
+  "prahamoni": [
+    {
+      "name": "Twilight",
+      "hp": 20,
+      "maxhp": 20,
+      "lvl": 3,
+      "abilities": [
+        {
+          "name": "Zobani",
+          "damage": 5,
+          "pp": 25,
+          "max_pp": 35
+        },
+        {
+          "name": "Sykot",
+          "damage": 15,
+          "pp": 12,
+          "max_pp": 15
+        }
+      ]
+    },
+    {
+      "name": "Ptak",
+      "hp": 15,
+      "maxhp": 15,
+      "lvl": 1,
+      "abilities": [
+        {
+          "name": "Zobani",
+          "damage": 5,
+          "pp": 7,
+          "max_pp": 35
+        },
+        {
+          "name": "Klovani",
+          "damage": 10,
+          "pp": 12,
+          "max_pp": 20
+        },
+        {
+          "name": "Sykot",
+          "damage": 15,
+          "pp": 8,
+          "max_pp": 15
+        }
+      ]
+    },
+    {
+      "name": "Twitter",
+      "hp": 15,
+      "maxhp": 15,
+      "lvl": 2,
+      "abilities": [
+        {
+          "name": "Zobani",
+          "damage": 5,
+          "pp": 26,
+          "max_pp": 35
+        },
+        {
+          "name": "Klovani",
+          "damage": 10,
+          "pp": 19,
+          "max_pp": 20
+        }
+      ]
+    }
+  ],
+  "lokace": "Praha"
+}
